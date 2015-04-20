@@ -1,0 +1,121 @@
+{
+    "cordova-plugin-device": {
+        "source": {
+            "type": "git",
+            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git",
+            "subdir": "."
+        }
+    },
+    "cordova-plugin-vibration": {
+        "source": {
+            "type": "git",
+            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-vibration.git",
+            "subdir": "."
+        }
+    },
+    "cordova-plugin-splashscreen": {
+        "source": {
+            "type": "git",
+            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-splashscreen.git",
+            "subdir": "."
+        }
+    },
+    "cordova-plugin-camera": {
+        "source": {
+            "type": "git",
+            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-camera.git",
+            "subdir": "."
+        }
+    },
+    "cordova-plugin-media-capture": {
+        "source": {
+            "type": "git",
+            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-media-capture.git",
+            "subdir": "."
+        }
+    },
+    "cordova-plugin-file": {
+        "source": {
+            "type": "git",
+            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-file.git",
+            "subdir": "."
+        }
+    },
+    "cordova-plugin-file-transfer": {
+        "source": {
+            "type": "git",
+            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-file-transfer.git",
+            "subdir": "."
+        }
+    },
+    "cordova-plugin-console": {
+        "source": {
+            "type": "git",
+            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-console.git",
+            "subdir": "."
+        }
+    },
+    "cordova-plugin-battery-status": {
+        "source": {
+            "type": "git",
+            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-battery-status.git",
+            "subdir": "."
+        }
+    },
+    "cordova-plugin-contacts": {
+        "source": {
+            "type": "git",
+            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-contacts.git",
+            "subdir": "."
+        }
+    },
+    "cordova-plugin-media": {
+        "source": {
+            "type": "git",
+            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-media.git",
+            "subdir": "."
+        }
+    },
+    "cordova-plugin-geolocation": {
+        "source": {
+            "type": "git",
+            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-geolocation.git",
+            "subdir": "."
+        }
+    },
+    "cordova-plugin-network-information": {
+        "source": {
+            "type": "git",
+            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-network-information.git",
+            "subdir": "."
+        }
+    },
+    "cordova-plugin-globalization": {
+        "source": {
+            "type": "git",
+            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-globalization.git",
+            "subdir": "."
+        }
+    },
+    "cordova-plugin-device-motion": {
+        "source": {
+            "type": "git",
+            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-device-motion.git",
+            "subdir": "."
+        }
+    },
+    "cordova-plugin-dialogs": {
+        "source": {
+            "type": "git",
+            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git",
+            "subdir": "."
+        }
+    },
+    "cordova-plugin-device-orientation": {
+        "source": {
+            "type": "git",
+            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-device-orientation.git",
+            "subdir": "."
+        }
+    }
+}
