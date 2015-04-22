@@ -24,27 +24,71 @@
         <meta name="msapplication-tap-highlight" content="no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <title>openHABit</title>
+
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-                <input type="button" id="testButton" value="click me"/>
-            </div>
-        </div>
+        <link href="css/jquery.mmenu.all.css" rel="stylesheet" type="text/css"/>
+        <link href="css/menu.css" rel="stylesheet" type="text/css"/>
+
         <script type="text/javascript" src="cordova.js"></script>
         <script src="js/libs/jquery/jquery.js" type="text/javascript"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script src="js/test.js" type="text/javascript"></script>
-        
+        <script src="js/jquery.mmenu.min.all.js" type="text/javascript"></script>
+
         <script type="text/javascript">
-    $("#testButton").click(function(e) {
-            console.log("click");
-        });
+            $(function () {
+                $('nav#menu').mmenu({
+                    extensions: ['effect-slide', 'pageshadow'],
+                    header: true,
+                    counters: true,
+                    footer: {
+                        add: true,
+                        content: 'Jakob Grabner, Thomas Jetzinger'
+                    }
+                });
+            });
         </script>
+
+
+    </head>
+    <body>
+        <div id="page">
+            <div class="header">
+                <a href="#menu"></a>
+                openHABit
+            </div>
+            <div class="content">
+                <p><strong>Content.</strong><br />
+            </div>
+            <nav id="menu">
+                <ul>
+                    <li><a href="#about">  
+                            <img src="img/icons/home.png" alt=""/>
+                                        Home
+                        <ul>
+                            <li><a href="#about/history">First Floor</a></li>
+                            <li><a href="#about/team">Second Floor</a>
+                                <ul>
+                                    <li>
+                                    <span>
+                                        <img src="img/icons/0fade0b184856becce6189128fa46618.png" alt=""/>
+                                        Livingroom<br />
+                                        <small>test</small>
+                                    </span>
+                                    </li>
+                                    <li><a href="#about/team/sales">Bathroom</a></li>
+                                    <li><a href="#about/team/development">Bedroom</a></li>
+                                    
+                                </ul>
+                            </li>
+                            <li><a href="#about/address">Outdoor</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#contact">Weather</a></li>
+                </ul>
+            </nav>
+        </div>
+
     </body>
 </html>
