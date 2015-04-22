@@ -9,33 +9,27 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+                            "xml": "<feature name=\"Keyboard\"><param name=\"android-package\" value=\"com.ionic.keyboard.IonicKeyboard\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Keyboard\"><param name=\"android-package\" value=\"com.ionic.keyboard.IonicKeyboard\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
                             "count": 1
                         }
                     ]
-                }
-            },
-            "AndroidManifest.xml": {
-                "parents": {
-                    "/manifest": [],
-                    "/*": []
                 }
             }
         }
     },
     "installed_plugins": {
-        "org.apache.cordova.device": {
-            "PACKAGE_NAME": "at.fhooe.mc.openHABit"
+        "com.ionic.keyboard": {
+            "PACKAGE_NAME": "com.ionicframework.openhabit996806"
         },
         "org.apache.cordova.console": {
-            "PACKAGE_NAME": "at.fhooe.mc.openHABit"
+            "PACKAGE_NAME": "com.ionicframework.openhabit996806"
         },
-        "com.ionic.keyboard": {
-            "PACKAGE_NAME": "at.fhooe.mc.openHABit"
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "com.ionicframework.openhabit996806"
         }
     },
     "dependent_plugins": {}
