@@ -1,4 +1,19 @@
-/* Empty. Add your own CSS if you like */
-.switchdemoBasicUsage .inset {
-    padding-left: 25px;
-    padding-top: 25px; }
+
+.toolbardemoBasicUsage md-toolbar md-icon.md-default-theme {
+    color: white; }
+
+.menu{
+    display: flex;
+    justify-content: space-between ;
+
+}
+
+.menu-sitemap{
+    display: flex;
+    /*align-items: flex-start;*/
+}
+
+.menu-fixed{
+    display: flex;
+    align-items: flex-end
+}
