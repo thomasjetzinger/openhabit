@@ -19,5 +19,10 @@
     "org.apache.cordova.console",
     "com.ionic.keyboard"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [
+    {
+      "platform": "android",
+      "locator": "windows8"
+    }
+  ]
 }

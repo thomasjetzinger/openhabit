@@ -1,4 +1,6 @@
 /* Empty. Add your own CSS if you like */
-.switchdemoBasicUsage .inset {
-    padding-left: 25px;
-    padding-top: 25px; }
+#list-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
