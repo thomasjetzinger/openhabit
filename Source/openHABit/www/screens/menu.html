@@ -16,39 +16,50 @@
 
     <ion-side-menu side="left">
 
+
+            <ion-header-bar class="positive-bg expanded menu-header"
+                            style="background: url('img/material4.jpg'); background-repeat: no-repeat;background-size:cover;">
+                    <span class="avatar"
+                          style="background: url('img/logo.png');
+
+                  background-size: cover;">
+
+            </span>
+
+                <h2>openHABit</h2>
+            </ion-header-bar>
+
+
         <div class="menu">
 
 
             <div class="menu-sitemap">
-                <ion-content scroll="false">
-                    <ion-content>
-                        <ion-list>
-                            <ion-item nav-clear menu-close href="#/app/main">
-                                Sitemap1
-                            </ion-item>
-                            <ion-item nav-clear menu-close href="#/app/settings">
-                                Sitemap12
-                            </ion-item>
-                    </ion-list>
-                    </ion-content>
-
+                <ion-content style="margin-top: 110px;">
+                    <ion-list>
+                        <ion-item nav-clear menu-close href="#/app/main">
+                            Sitemap 1
+                        </ion-item>
+                        <ion-item nav-clear menu-close href="#/app/other">
+                            Sitemap 2
+                        </ion-item>
+                </ion-content>
             </div>
+
 
             <div class="menu-fixed">
-                <ion-list>
-                    <ion-item nav-clear menu-close href="#/app/main">
-                        Main
-                    </ion-item>
-                    <ion-item nav-clear menu-close href="#/app/settings">
-                        Settings
-                    </ion-item>
-                    <ion-item nav-clear menu-close href="#/app/about">
-                        About
-                    </ion-item>
-                </ion-list>
+                    <ion-list>
+                        <ion-item nav-clear menu-close href="#/app/settings">
+                            Settings
+                        </ion-item>
+                        <ion-item nav-clear menu-close href="#/app/about">
+                            About
+                        </ion-item>
+                    </ion-list>
+
+
             </div>
         </div>
-        </ion-content>
+
 
     </ion-side-menu>
 </ion-side-menus>
