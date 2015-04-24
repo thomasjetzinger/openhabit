@@ -40,6 +40,15 @@ var controllerModule = angular.module('openHABit', ['ionic', 'ngMaterial'])
                 }
             })
 
+            .state('app.sitemap2', {
+                url: "/sitemap2",
+                views: {
+                    'menuContent': {
+                        templateUrl: "screens/sitemap2.html"
+                    }
+                }
+            })
+
             .state('app.settings', {
                 url: "/settings",
                 views: {
