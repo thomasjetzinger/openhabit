@@ -1,28 +1,20 @@
-angular.module('openHABit.controllers', []) // register controller
-
-//    .controller('SwitchDemoCtrl', function($scope) {
-//        $scope.data = {
-//            cb1: true,
-//            cb4: true,
-//            cb5: false
-//        };
-//        $scope.onChange = function(cbState) {
-//            $scope.message = "The switch is now: " + cbState;
-//        };
-//    })
-//
-//.controller('AppCtrl', ['$scope', '$mdSidenav', '$timeout','$log', function($scope, $mdSidenav) {
-//    var allMuppets = [];
-//
-//    $scope.toggleSidenav = toggleSidenav;
-//
-//
-//
-//    function toggleSidenav(name) {
-//        $mdSidenav(name).toggle();
-//    }
-//
-//
-//}]);
-//
-
+angular.module('openHabit.controllers', []) // register controller
+    .controller('SubheaderAppCtrl', function($scope) {
+        $scope.messages = [
+            {
+                face : 'img/icons/temperature.png',
+                name: 'Temperature',
+                value: '20 °C'
+            },
+            {
+                face : 'img/icons/slider.png',
+                name: 'Light',
+                value: 'On'
+            },
+            {
+                face : 'img/icons/heating.png',
+                name: 'Heating',
+                value: 'Off'
+            }
+        ];
+    });
