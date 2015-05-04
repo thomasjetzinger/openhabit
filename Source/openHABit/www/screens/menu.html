@@ -17,8 +17,8 @@
     <ion-side-menu side="left">
 
 
-            <ion-header-bar class="positive-bg expanded menu-header"
-                            style="background: url('img/material4.jpg'); background-repeat: no-repeat;background-size:cover;">
+        <ion-header-bar class="positive-bg expanded menu-header"
+                        style="background: url('img/material4.jpg'); background-repeat: no-repeat;background-size:cover;">
                     <span class="avatar"
                           style="background: url('img/logo.png');
 
@@ -26,8 +26,8 @@
 
             </span>
 
-                <h2>openHABit</h2>
-            </ion-header-bar>
+            <h2>openHABit</h2>
+        </ion-header-bar>
 
 
         <div class="menu">
@@ -35,26 +35,34 @@
 
             <div class="menu-sitemap">
                 <ion-content style="margin-top: 110px;">
+                    <!--<md-list ng-controller="menuController">-->
+                        <!--<md-list-item  menu-close menuClose ng-click="navigateTo(app.main)" ui-sref="app.main">-->
+                            <!--<p>Sitemap 1</p>-->
+                        <!--</md-list-item>-->
+                        <!--<md-list-item ng-click="navigateTo(app.settings)">-->
+                            <!--<p>Sitemap 2</p>-->
+                        <!--</md-list-item>-->
+                    <!--</md-list>-->
                     <ion-list>
-                        <ion-item nav-clear menu-close href="#/app/main">
-                            Sitemap 1
-                        </ion-item>
-                        <ion-item nav-clear menu-close href="#/app/sitemap2">
-                            Sitemap 2
-                        </ion-item>
+                    <ion-item nav-clear menu-close href="#/app/main">
+                    Sitemap 1
+                    </ion-item>
+                    <ion-item nav-clear menu-close href="#/app/sitemap2">
+                    Sitemap 2
+                    </ion-item>
                 </ion-content>
             </div>
 
 
             <div class="menu-fixed">
-                    <ion-list>
-                        <ion-item nav-clear menu-close href="#/app/settings">
-                            Settings
-                        </ion-item>
-                        <ion-item nav-clear menu-close href="#/app/about">
-                            About
-                        </ion-item>
-                    </ion-list>
+                <ion-list>
+                    <ion-item nav-clear menu-close href="#/app/settings">
+                        Settings
+                    </ion-item>
+                    <ion-item nav-clear menu-close href="#/app/about">
+                        About
+                    </ion-item>
+                </ion-list>
 
 
             </div>

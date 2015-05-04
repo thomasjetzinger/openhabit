@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'openHabit' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var controllerModule = angular.module('openHABit', ['ionic', 'ngMaterial'])
+var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial','ngMdIcons'])
 
 
     .run(function ($ionicPlatform) {
@@ -18,8 +18,9 @@ var controllerModule = angular.module('openHABit', ['ionic', 'ngMaterial'])
             }
         });
     })
-
-
+    .config(function( $mdGestureProvider ) {
+        $mdGestureProvider.skipClickHijack();
+    })
     .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
         // Turn off caching for demo simplicity's sake
         $ionicConfigProvider.views.maxCache(0);
@@ -28,7 +29,6 @@ var controllerModule = angular.module('openHABit', ['ionic', 'ngMaterial'])
                 url: "/app",
                 abstract: true,
                 templateUrl: "screens/menu.html"
-            //controller: 'AppCtrl1'
             })
 
             .state('app.main', {
@@ -70,5 +70,13 @@ var controllerModule = angular.module('openHABit', ['ionic', 'ngMaterial'])
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/main');
+    })
+
+.controller('menuController', function($scope, $state) {
+
+        $scope.navigateTo = function(to) {
+            $state.go('app.settings');
+        };
+
     });
 
