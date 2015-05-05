@@ -1,7 +1,7 @@
 /**
  * Created by Thomas Jetzinger on 24/04/2015.
  */
-openHabitModule.controller('gridListCtrl', function($scope) {
+controllerModule.controller('gridListCtrl', function($scope) {
 
 
 
