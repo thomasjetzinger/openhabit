@@ -33,7 +33,7 @@
         <div class="menu">
 
 
-            <div class="menu-sitemap">
+            <div ng-controller="SitemapsController" class="menu-sitemap">
                 <ion-content style="margin-top: 110px;">
                     <ion-list>
                         <ion-item nav-clear menu-close href="#/app/main">
@@ -42,6 +42,10 @@
                         <ion-item nav-clear menu-close href="#/app/sitemap2">
                             Sitemap 2
                         </ion-item>
+                        <ion-item nav-clear menu-close href=#/app/{{sitemap.name}}" ng-repeat="sitemap in sitemaps" >
+                            {{sitemap.name}}
+                        </ion-item>
+                    </ion-list>
                 </ion-content>
             </div>
 

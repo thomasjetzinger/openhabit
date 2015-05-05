@@ -4,6 +4,9 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta name="viewport"
           content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+   <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' *.googleapis.com; child-src 'none'; object-src 'none'">-->
+
     <title></title>
 
     <!-- -------------  CSS  ------------- -->
@@ -41,11 +44,18 @@
     <!-- ionic material-->
     <script src="lib/ionic-material/ionic.material.min.js"></script>
 
+    <!-- angular resource-->
+    <script src="lib/angular-resource/angular-resource.js"></script>
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
     <script src="js/list_controller.js"></script>
     <script src="js/settings_controller.js"></script>
+
+
+    <!-- js for getting openhab items from server-->
+    <script src="js/openhab_service.js"></script>
+    <script src="js/rest_controllers.js"></script>
 
 
 </head>

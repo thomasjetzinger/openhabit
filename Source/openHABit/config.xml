@@ -8,7 +8,10 @@
       Ionic Framework Team
     </author>
   <content src="index.html"/>
-  <access origin="*"/>
+  <access origin="http://*" />
+  <access origin="https://*" />
+  <access origin="http://*" launch-external="yes" />
+  <access origin="https://*" launch-external="yes" />
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
