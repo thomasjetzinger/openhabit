@@ -1,13 +1,16 @@
-/**
- * Created by Thomas Jetzinger on 24/04/2015.
- */
-controllerModule.controller('gridListCtrl', function($scope) {
+
+openHabitModule.controller('gridListCtrl', function($scope, $state, sitemapContent) {
 
 
+    console.log("gridListCtrl"+sitemapContent);
 
+    $scope.sitemapData = sitemapContent;
+    //$scope.sitemapName = sitemapName;
 
-    $scope.sitemapData = buildData();
-
+    $scope.navigateTo = function ( path ) {
+        console.log("Navigate to "+path);
+        $state.go(path);
+    };
 
     function buildData(){
         var data = [];
