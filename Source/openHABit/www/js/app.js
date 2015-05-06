@@ -24,6 +24,7 @@ var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdI
                 url: "/main",
                 resolve: {
 
+                    sitemapName:  function () {return "Main"},
                     sitemapContent: function (SiteMapContentService) {
                         console.log("resolve sitemapContent\n");
                         var data = [];
@@ -31,8 +32,8 @@ var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdI
                         data.push(SiteMapContentService.getItem(1));
                         return data;
                     }
-                    //,
-                    //sitemapName: "Main"
+
+
                 },
                 views: {
                     'menuContent': {
@@ -42,20 +43,40 @@ var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdI
                 }
             })
 
-            .state('app.sitemap2', {
-                url: "/sitemap2",
+            .state('app.secondFloor', {
+                url: "/main",
                 resolve: {
 
+                    sitemapName:  function () {return "Second Floor"},
                     sitemapContent: function (SiteMapContentService) {
-                        console.log("resolve sitemapContent2\n");
-                        return SiteMapContentService.getItem(2);
+                        console.log("resolve secondFloor\n");
+                        return [SiteMapContentService.getItem(2)];
                     }
-                    //,
-                    //sitemapName: "Second Floor"
+
                 },
                 views: {
                     'menuContent': {
-                        templateUrl: "screens/sitemap2.html",
+                        templateUrl: "screens/main.html",
+                        controller: 'gridListCtrl'
+                    }
+                }
+
+            })
+
+            .state('app.bathroom', {
+                url: "/main",
+                resolve: {
+
+                    sitemapName:  function () {return "Bathroom"},
+                    sitemapContent: function (SiteMapContentService) {
+                        console.log("resolve bathroom\n");
+                        return [SiteMapContentService.getItem(3)];
+                    }
+
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: "screens/main.html",
                         controller: 'gridListCtrl'
                     }
                 }

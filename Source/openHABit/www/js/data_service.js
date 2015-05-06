@@ -24,9 +24,9 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
                         },
                         {
                             icon: "img/icons/openhab/groundfloor.png",
-                            title: "First Floor ",
+                            title: "Bathroom",
                             type: "group",
-                            link: "app.sitemap2",
+                            link: "app.bathroom",
                             rowSpan: 1,
                             columnSpan: 1
                         },
@@ -53,9 +53,9 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
                         },
                         {
                             icon: "img/icons/openhab/groundfloor.png",
-                            title: "Group ",
+                            title: "Second Floor",
                             type: "group",
-                            link: "app.sitemap2",
+                            link: "app.secondFloor",
                             rowSpan: 1,
                             columnSpan: 1
                         },
@@ -71,8 +71,30 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
                     return {items: test1,title: "First Floor"};
                 }
 
-                else{
+                else if (_id == 2){
                     var test2 = [
+                        {
+                            icon: "img/icons/openhab/light-off.png",
+                            title: "Switch ",
+                            type: "switch",
+                            state: "true",
+                            rowSpan: 1,
+                            columnSpan: 1
+                        },
+                        {
+                            icon: "img/icons/openhab/bath.png",
+                            title: "Bathroom ",
+                            type: "group",
+                            link: "app.bathroom",
+                            rowSpan: 1,
+                            columnSpan: 1
+                        }
+                    ];
+                    return {items: test2,title: "First Floor"};
+                }
+
+                else{
+                    var test3 = [
                         {
                             icon: "img/icons/openhab/light-off.png",
                             title: "Switch ",
@@ -89,7 +111,7 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
                             columnSpan: 1
                         }
                     ];
-                    return {items: test2,title: "Living Room"};
+                    return {items: test3,title: "Bathroom"};
 
                 }
 
