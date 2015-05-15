@@ -5,32 +5,28 @@
 
             <div layout="column" flex class="ng-scope">
 
-                <!-- Sections-->
 
                 <div ng-repeat="section in sitemapData">
-                    {{sitemapData[0].data.title}}
-
                     <section>
-                        <md-subheader class="md-primary">{{section.title}}</md-subheader>
+                        <md-subheader class="md-primary">{{section.label}}</md-subheader>
                         <md-grid-list
                                 md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
                                 md-row-height-gt-md="1:3" md-row-height="6:1"
                                 md-gutter="8px" md-gutter-gt-sm="4px">
                             <md-grid-tile ng-repeat="item in section.items"
                                           ng-switch="item.type"
-                                          md-rowspan="item.rowSpan"
-                                          md-colspan="item.columnSpan"
+                                          md-rowspan="1"
+                                          md-colspan="1"
                                           md-colspan-sm="1">
-
 
                                 <div flex layout="row" data-ng-switch-when="switch" layout="row"
                                      layout-align="space-around center">
 
                                     <div flex="30" layout="row" layout-align="space-around center">
-                                        <img ng-src="{{item.icon}}" alt="{{item.icon}}">
+                                        <img ng-src="img/icons/openhab/{{item.icon}}.png" alt="img/icons/openhab/{{item.icon}}.png">
                                     </div>
                                     <div flex="40" layout="row" layout-align="space-around center">
-                                        {{item.title}}
+                                        {{item.label}}
                                     </div>
                                     <div flex="30" layout="row" layout-align="space-around center">
                                         <md-switch ng-model="item.state" aria-label="Switch 1">
@@ -40,14 +36,15 @@
                                 </div>
 
 
-                                <div flex layout="row" data-ng-switch-when="group" layout="row"
-                                     layout-align="space-around center" ng-click="navigateTo('{{item.link}}')">
+                                <div flex layout="row" data-ng-switch-when="Group" layout="row"
+                                     layout-align="space-around center" ng-click="navigateTo('{{section.linkedState}}.{{item.linkedPage.id}}')">
+
 
                                     <div flex="30" layout="row" layout-align="space-around center">
-                                        <img ng-src="{{item.icon}}" alt="{{item.icon}}">
+                                        <img ng-src="img/icons/openhab/{{item.icon}}.png" alt="img/icons/openhab/{{item.icon}}.png">
                                     </div>
                                     <div flex="40" layout="row" layout-align="space-around center">
-                                        {{item.title}}
+                                        {{item.label}}
                                     </div>
                                     <div flex="30" layout="row" layout-align="space-around center">
                                         <ng-md-icon icon="navigate_next"></ng-md-icon>
