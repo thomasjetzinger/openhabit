@@ -25,6 +25,7 @@ openHabitModule.controller('LoadingController', ['$scope', '$state','Sitemaps', 
                 console.log("state " + state.name);
             });
 
+            //TODO go to state homepage.id
             $state.go("app.demo.demo_0.0000");
         });
 

@@ -35,8 +35,6 @@ sitemapServices.factory('StateCreator', ["$state", "$rootScope", function($state
                         console.log("resolve sitemapContent for " + stateName + "\n");
                         return SiteMapContentService.getItem(stateName);
                     }
-
-
                 },
                 views: {
                     'menuContent@app': {
