@@ -14,7 +14,7 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
             },
 
             addItem: function(state, widget) {
-                console.log("add widgets for state " + state);
+                //console.log("add widgets for state " + state);
                 if(state in widgetCollection)
                     widgetCollection[state].push(widget);
                 else
@@ -31,7 +31,7 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
                 else if (_id == 0){
                     var favourites = [
                         {
-                            icon: "light-off.png",
+                            icon: "light-off",
                             label: "Switch ",
                             type: "switch",
                             state: "true",
@@ -39,7 +39,7 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
                             columnSpan: 1
                         },
                         {
-                            icon: "img/icons/openhab/groundfloor.png",
+                            icon: "groundfloor",
                             label: "Bathroom",
                             type: "Group",
                             linkedState: "app.bathroom",
@@ -47,7 +47,7 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
                             columnSpan: 1
                         },
                         {
-                            icon: "img/icons/openhab/contact.png",
+                            icon: "contact",
                             label: "Contact ",
                             type: "contact",
                             rowSpan: 1,
@@ -60,7 +60,7 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
                 else if (_id == 1){
                     var test1 = [
                         {
-                            icon: "img/icons/openhab/light-off.png",
+                            icon: "light-off",
                             label: "Switch ",
                             type: "switch",
                             state: "true",
@@ -68,7 +68,7 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
                             columnSpan: 1
                         },
                         {
-                            icon: "img/icons/openhab/groundfloor.png",
+                            icon: "groundfloor",
                             label: "Second Floor",
                             type: "Group",
                             linkedState: "app.secondFloor",
@@ -76,7 +76,7 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
                             columnSpan: 1
                         },
                         {
-                            icon: "img/icons/openhab/contact.png",
+                            icon: "contact",
                             label: "Contact ",
                             type: "contact",
                             linkedState: "detail",
@@ -90,7 +90,7 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
                 else if (_id == 2){
                     var test2 = [
                         {
-                            icon: "img/icons/openhab/light-off.png",
+                            icon: "light-off",
                             label: "Switch ",
                             type: "switch",
                             state: "true",
@@ -98,7 +98,7 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
                             columnSpan: 1
                         },
                         {
-                            icon: "img/icons/openhab/bath.png",
+                            icon: "bath",
                             label: "Bathroom ",
                             type: "Group",
                             linkedState: "app.bathroom",
@@ -106,13 +106,13 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
                             columnSpan: 1
                         }
                     ];
-                    return {items: test2,label: "First Floor"};
+                    return {items: test2,label: "Second Floor"};
                 }
 
                 else{
                     var test3 = [
                         {
-                            icon: "img/icons/openhab/light-off.png",
+                            icon: "light-off",
                             label: "Switch ",
                             type: "switch",
                             state: "true",
@@ -120,7 +120,7 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
                             columnSpan: 1
                         },
                         {
-                            icon: "img/icons/openhab/contact.png",
+                            icon: "contact",
                             label: "Contact ",
                             type: "contact",
                             rowSpan: 1,

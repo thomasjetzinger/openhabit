@@ -19,29 +19,27 @@ sitemapServices.factory('Sitemap', ['$resource',
     }]);
 
 
-sitemapServices.factory('StateCreator', [
-    function () {
+sitemapServices.factory('StateCreator', ["$state", "$rootScope", function($state, $rootScope) {
 
         var createState = function (parentStateName, stateName) {
+
             var state = {
-                name: stateName,
-                url: "/main",
+                stateName: stateName,
+                url: "/" + stateName.substring(stateName.lastIndexOf(".") + 1),
                 resolve: {
 
                     sitemapName: function () {
-                        return "Bedroom"
+                        return stateName;
                     },
                     sitemapContent: function (SiteMapContentService) {
-                        console.log("resolve sitemapContent for " + name + "\n");
-                        var data = [];
-                        data.push(SiteMapContentService.getItem(name));
-                        return data;
+                        console.log("resolve sitemapContent for " + stateName + "\n");
+                        return SiteMapContentService.getItem(stateName);
                     }
 
 
                 },
                 views: {
-                    'menuContent': {
+                    'menuContent@app': {
                         templateUrl: "screens/main.html",
                         controller: 'gridListCtrl'
                     }

@@ -5,6 +5,15 @@
     <meta name="viewport"
           content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
 
+ <!-- Enable all requests, inline styles, and eval() -->
+    <meta http-equiv="Content-Security-Policy"
+          content="script-src * 'unsafe-eval';
+                      connect-src * 'unsafe-eval';
+                      object-src 'self';
+                      style-src * 'unsafe-inline';
+                      img-src *"
+            >
+
    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' *.googleapis.com; child-src 'none'; object-src 'none'">-->
 
     <title></title>
@@ -53,14 +62,12 @@
    <!--see https://klarsys.github.io/angular-material-icons/-->
    <script src="lib/__cdn.jsdelivr.net_angular-material-icons_0.4.0_angular-material-icons.min.js"></script>
 
-
-
-
     <!----------------------- your app's js ---------------------------------->
     <script src="js/data_service.js"></script>
     <script src="js/app.js"></script>
     <script src="js/gridlist_controller.js"></script>
     <script src="js/settings_controller.js"></script>
+    <script src="js/loading_controller.js"></script>
 
 
 
