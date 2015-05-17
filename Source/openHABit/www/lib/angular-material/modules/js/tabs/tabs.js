@@ -2,10 +2,11 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * v0.9.0-master-61b6240
+ * v0.9.4-master-7aff8ff
  */
-(function () {
+(function( window, angular, undefined ){
 "use strict";
+
 /**
  * @ngdoc module
  * @name material.components.tabs
@@ -122,6 +123,15 @@ function MdTab () {
 
     scope.$watch('active', function (active) { if (active) ctrl.select(data.getIndex()); });
     scope.$watch('disabled', function () { ctrl.refreshIndex(); });
+    scope.$watch(
+        function () {
+          return Array.prototype.indexOf.call(tabs, element[0]);
+        },
+        function (newIndex) {
+          data.index = newIndex;
+          ctrl.updateTabOrder();
+        }
+    );
     scope.$on('$destroy', function () { ctrl.removeTab(data); });
 
     function getLabel () {
@@ -198,7 +208,7 @@ function MdTabsController ($scope, $element, $window, $timeout, $mdConstant, $md
   ctrl.offsetLeft = 0;
   ctrl.hasContent = false;
   ctrl.hasFocus = false;
-  ctrl.lastClick = false;
+  ctrl.lastClick = true;
 
   ctrl.redirectFocus = redirectFocus;
   ctrl.attachRipple = attachRipple;
@@ -217,6 +227,7 @@ function MdTabsController ($scope, $element, $window, $timeout, $mdConstant, $md
   ctrl.refreshIndex = refreshIndex;
   ctrl.incrementSelectedIndex = incrementSelectedIndex;
   ctrl.updateInkBarStyles = updateInkBarStyles;
+  ctrl.updateTabOrder = $mdUtil.debounce(updateTabOrder, 100);
 
   init();
 
@@ -269,6 +280,17 @@ function MdTabsController ($scope, $element, $window, $timeout, $mdConstant, $md
         break;
     }
     ctrl.lastClick = false;
+  }
+
+  function updateTabOrder () {
+    var selectedItem = ctrl.tabs[$scope.selectedIndex],
+        focusItem = ctrl.tabs[ctrl.focusIndex];
+    ctrl.tabs = ctrl.tabs.sort(function (a, b) {
+      return a.index - b.index;
+    });
+    $scope.selectedIndex = ctrl.tabs.indexOf(selectedItem);
+    ctrl.focusIndex = ctrl.tabs.indexOf(focusItem);
+    $timeout(updateInkBarStyles, 0, false);
   }
 
   function incrementSelectedIndex (inc, focus) {
@@ -771,4 +793,4 @@ function MdTemplate ($compile) {
 }
 MdTemplate.$inject = ["$compile"];
 
-})();
+})(window, window.angular);

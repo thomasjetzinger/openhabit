@@ -2,10 +2,11 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * v0.9.0-master-61b6240
+ * v0.9.4-master-7aff8ff
  */
-(function () {
+(function( window, angular, undefined ){
 "use strict";
+
 /**
  * @ngdoc module
  * @name material.components.list
@@ -130,6 +131,11 @@ function mdListItemDirective($mdAria, $mdConstant, $timeout) {
           container = angular.element('<md-button class="md-no-style"><div class="md-list-item-inner"></div></md-button>');
           container[0].setAttribute('ng-click', tEl[0].getAttribute('ng-click'));
           tEl[0].removeAttribute('ng-click');
+
+          if (tEl[0].getAttribute('aria-label')) {
+            container[0].setAttribute('aria-label', tEl[0].getAttribute('aria-label'));
+            tEl[0].removeAttribute('aria-label');
+          }
           container.children().eq(0).append(tEl.contents());
         }
 
@@ -263,4 +269,4 @@ function MdListController($scope, $element, $mdInkRipple) {
 }
 MdListController.$inject = ["$scope", "$element", "$mdInkRipple"];
 
-})();
+})(window, window.angular);
