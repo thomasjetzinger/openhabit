@@ -3,8 +3,8 @@
  */
 
 openHabitModule.controller('LoadingController', ['$scope', '$state','Sitemaps', 'Sitemap', 'StateCreator',
-    'SiteMapContentService',
-    function($scope, $state, Sitemaps, Sitemap, StateCreator, SiteMapContentService) {
+    'SiteMapContentService', '$ionicViewService',
+    function($scope, $state, Sitemaps, Sitemap, StateCreator, SiteMapContentService, $ionicViewService) {
         console.log("query sitemaps");
         var sitemap = Sitemap.query();
 
@@ -23,6 +23,10 @@ openHabitModule.controller('LoadingController', ['$scope', '$state','Sitemaps', 
 
             angular.forEach($state.get(), function(state) {
                 console.log("state " + state.name);
+            });
+
+            $ionicViewService.nextViewOptions({
+                disableBack: true
             });
 
             //TODO go to state homepage.id
