@@ -1,7 +1,9 @@
 /**
  * Created by Thomas Jetzinger on 24/04/2015.
  */
-openHabitModule.controller('SettingsCtrl', function($scope) {
+openHabitModule.controller('SettingsCtrl', function($scope, $localStorage) {
+        $scope.$storage = $localStorage;
+
         $scope.color = {
             red: Math.floor(Math.random() * 255),
             green: Math.floor(Math.random() * 255),

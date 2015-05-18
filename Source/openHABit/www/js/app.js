@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 var $stateProviderRef = null;
 
-var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdIcons', 'SitemapServices', 'SiteMapContentServiceModule'])
+var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdIcons','ngStorage', 'SitemapServices', 'SiteMapContentServiceModule'])
 
 
     .config(function ($mdGestureProvider) {
@@ -66,7 +66,17 @@ var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdI
 
             // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/loading');
-    }]).run(function ($ionicPlatform) {
+    }]).run(function ($ionicPlatform, $localStorage) {
+
+
+        $localStorage.$default({
+            url: 'http://127.0.0.1:8080',
+            rating1:  3
+        });
+        //todo remove reset function
+        //$localStorage.$reset();
+
+
         $ionicPlatform.ready(function ($rootScope) {
             console.log("ionic ready");
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

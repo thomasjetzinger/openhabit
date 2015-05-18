@@ -2,56 +2,80 @@
  * Created by Thomas Jetzinger on 17/05/2015.
  */
 
-openHabitModule.controller('LoadingController', ['$scope', '$state','Sitemaps', 'Sitemap', 'StateCreator',
-    'SiteMapContentService', '$ionicViewService',
-    function($scope, $state, Sitemaps, Sitemap, StateCreator, SiteMapContentService, $ionicViewService) {
+openHabitModule.controller('LoadingController', ['$scope', '$rootScope', '$state', 'Sitemaps', 'Sitemap', 'StateCreator',
+    'SiteMapContentService', '$ionicHistory',
+    function ($scope, $rootScope, $state, Sitemaps, Sitemap, StateCreator, SiteMapContentService, $ionicHistory) {
         console.log("query sitemaps");
-        var sitemap = Sitemap.query();
+        var sitemaps = Sitemaps.query();
 
-        $scope.sitemap = sitemap;
+        sitemaps.$promise.then(function (sitemaps_result) {
+            var index = 0;
+            angular.forEach(sitemaps_result.sitemap, function (sitemap) {
+                var sitemap_content = Sitemap(sitemap.link).query();
+                sitemap_content.$promise.then(function (sitemap_content_result) {
 
-        $scope.sitemap.$promise.then(function (result) {
-            $scope.sitemap = result;
 
-            SiteMapContentService.reset();
 
-            console.log("result received");
-            // get homepage
-            var homepage = result.homepage;
 
-            iterateWidgets('app.' + homepage.id, homepage.widget, SiteMapContentService, StateCreator, $state);
 
-            angular.forEach($state.get(), function(state) {
-                console.log("state " + state.name);
+                    // get homepage
+                    var homepage = sitemap_content_result.homepage;
+                    console.log("result received for app " + sitemap_content_result);
+                    var widgetCollection = [];
+                    iterateWidgets('app.' + homepage.id, homepage.widget, StateCreator, $state, widgetCollection);
+                    sitemaps_result.sitemap[index].widgetCollection = widgetCollection;
+                    sitemaps_result.sitemap[index].id = 'app.' + homepage.id;
+                    //angular.forEach($state.get(), function(state) {
+                    //    console.log("state " + state.name);
+                    //});
+
+                    index = index +1;
+
+                    if(index >= sitemaps_result.sitemap.length){
+                        SiteMapContentService.setSitemaps(sitemaps_result.sitemap);
+                        $rootScope.$broadcast('sitemaps:updated', sitemaps_result.sitemap);
+                        $ionicHistory.nextViewOptions({
+                            disableAnimate: true,
+                            disableBack: true
+                        });
+                        $state.go("app."+homepage.id);
+                    }
+                });
+
             });
 
-            $ionicViewService.nextViewOptions({
-                disableBack: true
-            });
 
-            //TODO go to state homepage.id
-            $state.go("app.demo.demo_0.0000");
+
+
+
+
+
+
         });
 
     }]);
 
-function iterateWidgets(stateName, widgets, SiteMapContentService, StateCreator, $state) {
+function iterateWidgets(stateName, widgets, StateCreator, $state, widgetCollection ) {
 
-    SiteMapContentService.addItem(stateName, widgets);
 
-    var newState = StateCreator.createState(stateName, stateName);
+    if(stateName in widgetCollection)
+        widgetCollection[stateName].push(widgets);
+    else
+        widgetCollection[stateName] = widgets;
 
-    if($state.get(stateName) == null) {
+    var newState = StateCreator.createState(stateName);
+
+    if ($state.get(stateName) == null) {
         openHabitModule.stateProvider.state(stateName, newState);
         console.log("create state " + stateName);
     }
 
-    angular.forEach(widgets, function(widget) {
+    angular.forEach(widgets, function (widget) {
 
-        if(widget.type == "Frame") {
-            iterateWidgets(stateName + "." + widget.widgetId, widget.widget, SiteMapContentService, StateCreator, $state);
-        } else if(widget.linkedPage) {
-            iterateWidgets(stateName + "." + widget.linkedPage.id, widget.linkedPage.widget, SiteMapContentService, StateCreator, $state);
+        if (widget.type == "Frame") {
+            iterateWidgets(stateName + "." + widget.widgetId, widget.widget,  StateCreator, $state,widgetCollection);
+        } else if (widget.linkedPage) {
+            iterateWidgets(stateName + "." + widget.linkedPage.id, widget.linkedPage.widget,  StateCreator, $state,widgetCollection);
         }
 
     });

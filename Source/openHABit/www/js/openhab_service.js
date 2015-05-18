@@ -2,26 +2,30 @@
  * Created by Thomas Jetzinger on 04/05/2015.
  */
 
-var sitemapServices = angular.module('SitemapServices', ['ngResource']);
+var sitemapServices = angular.module('SitemapServices', ['ngResource','ngStorage']);
 
-sitemapServices.factory('Sitemaps', ['$resource',
-    function ($resource) {
-        return $resource('http://demo.openhab.org:8080/rest/sitemaps?type=jsonp&jsoncallback=JSON_CALLBACK', {}, {
+sitemapServices.factory('Sitemaps', ['$resource','$localStorage',
+    function ($resource,$localStorage) {
+
+        return $resource($localStorage.url+'/rest/sitemaps?type=jsonp&jsoncallback=JSON_CALLBACK', {}, {
             query: {method: 'JSONP', params: {sitemap: 'sitemap'}, isArray: false}
         });
     }]);
 
 sitemapServices.factory('Sitemap', ['$resource',
     function ($resource) {
-        return $resource('http://demo.openhab.org:8080/rest/sitemaps/demo', {}, {
-            query: {method: 'JSONP', params: {type: 'jsonp', jsoncallback: 'JSON_CALLBACK' } ,isArray: false}
-        });
+        return function(url){
+            return $resource(url, {}, {
+                query: {method: 'JSONP', params: {type: 'jsonp', jsoncallback: 'JSON_CALLBACK' } ,isArray: false}
+            });
+        }
+
     }]);
 
 
-sitemapServices.factory('StateCreator', ["$state", "$rootScope", function($state, $rootScope) {
+sitemapServices.factory('StateCreator', [function() {
 
-        var createState = function (parentStateName, stateName) {
+        var createState = function (stateName) {
 
             var state = {
                 stateName: stateName,
@@ -32,7 +36,7 @@ sitemapServices.factory('StateCreator', ["$state", "$rootScope", function($state
                         return stateName;
                     },
                     sitemapContent: function (SiteMapContentService) {
-                        console.log("resolve sitemapContent for " + stateName + "\n");
+                        //console.log("resolve sitemapContent for " + stateName + "\n");
                         return SiteMapContentService.getItem(stateName);
                     }
                 },

@@ -33,32 +33,22 @@
         <div class="menu">
 
 
-            <div ng-controller="SitemapsController" class="menu-sitemap">
+            <div ng-controller="MenuSitemapsController" class="menu-sitemap">
+
                 <ion-content style="margin-top: 110px;">
-                    <!--<md-list ng-controller="menuController">-->
-                        <!--<md-list-item  menu-close menuClose ng-click="navigateTo(app.main)" ui-sref="app.main">-->
-                            <!--<p>Sitemap 1</p>-->
-                        <!--</md-list-item>-->
-                        <!--<md-list-item ng-click="navigateTo(app.settings)">-->
-                            <!--<p>Sitemap 2</p>-->
-                        <!--</md-list-item>-->
-                    <!--</md-list>-->
                     <ion-list>
-                        <ion-item nav-clear menu-close href="#/app/loading">
-                            Sitemap 1
-                        </ion-item>
-                        <ion-item nav-clear menu-close href="#/app/sitemap2">
-                            Sitemap 2
-                        </ion-item>
-                        <ion-item nav-clear menu-close href=#/app/{{sitemap.name}}" ng-repeat="sitemap in sitemaps" >
-                            {{sitemap.name}}
+                        <!--<ion-item nav-clear menu-close href=#/app/{{sitemap.name}}" ng-repeat="sitemap in sitemaps" >-->
+                        <ion-item nav-clear menu-close  ng-repeat="sitemap in sitemaps"  ng-click="onClick(sitemap.id)">
+
+                        <!-- todo show  {{sitemap.label}}  or   {{sitemap.name}}-->
+                           {{sitemap.label}}
                         </ion-item>
                     </ion-list>
                 </ion-content>
             </div>
 
 
-            <div class="menu-fixed">
+            <div class="menu-fixed" ng-controller="MenuSitemapsController">
                 <ion-list>
                     <ion-item nav-clear menu-close href="#/app/settings">
                         Settings
