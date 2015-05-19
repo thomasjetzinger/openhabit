@@ -1,0 +1,14 @@
+<div flex layout="row">
+
+    <div flex-grow="1" layout="row" layout-align="center">
+        <img ng-src="img/icons/openhab/{{item.icon}}.png" alt="img/icons/openhab/{{item.icon}}.png">
+    </div>
+    <div flex-grow="1" layout="row" layout-align="space-around center">
+        {{item.label}}
+    </div>
+    <div flex-grow="1" layout="row" layout-align="space-around center">
+        <md-switch ng-model="item.state" aria-label="Switch 1">
+        </md-switch>
+    </div>
+
+</div>

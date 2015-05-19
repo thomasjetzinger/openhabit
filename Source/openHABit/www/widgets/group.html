@@ -1,0 +1,15 @@
+<div flex layout="row" layout="row"
+     layout-align="space-around center" ng-click="navigateTo('{{sitemapData.linkedState}}.{{item.linkedPage.id}}')">
+
+
+    <div flex="30" layout="row" layout-align="space-around center">
+        <img ng-src="img/icons/openhab/{{item.icon}}.png" alt="img/icons/openhab/{{item.icon}}.png">
+    </div>
+    <div flex="40" layout="row" layout-align="space-around center">
+        {{item.label}}
+    </div>
+    <div flex="30" layout="row" layout-align="space-around center">
+        <ng-md-icon icon="navigate_next"></ng-md-icon>
+    </div>
+
+</div>
