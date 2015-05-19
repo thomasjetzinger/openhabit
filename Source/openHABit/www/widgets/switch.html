@@ -1,13 +1,37 @@
-<div flex layout="row" data-ng-switch-when="Switch" layout="row"
-     layout-align="space-around center">
+<!--Choice-->
+<div flex layout="row"
+     layout-align="space-around center" ng-if="item.mapping != null">
 
-    <div flex="30" layout="row" layout-align="space-around center">
+
+    <div flex="20" layout-align="space-around center">
+        <img ng-src="img/icons/openhab/{{item.icon}}.png" alt="img/icons/openhab/{{item.icon}}.png">
+    </div>
+    <div flex="30" layout-align="center">
+        {{item.label}}
+    </div>
+    <div flex="50" layout-align="space-around center">
+        <md-select placeholder="{{item.label}}" ng-model="pickedValue">
+            <md-option ng-repeat="entry in item.mapping">{{entry.label}}</md-option>
+        </md-select>
+    </div>
+
+
+</div>
+
+<!--Switch-->
+<div flex layout="row"
+     layout-align="space-around center" ng-if="item.mapping == null">
+    <div flex="20" layout="row" layout-align="space-around center">
         <img ng-src="img/icons/openhab/{{item.icon}}.png" alt="img/icons/openhab/{{item.icon}}.png">
     </div>
     <div flex="40" layout="row" layout-align="space-around center">
         {{item.label}}
     </div>
     <div flex="30" layout="row" layout-align="space-around center">
-        <md-switch ng-model="item.state" aria-label="Switch 1" ng-change="onSwitchChange('{{item}}')">
+        <md-switch ng-model="item.item.state" ng-true-value="'ON'" ng-false-value="'OFF'" aria-label="{{item.label}}"
+                   ng-change="onSwitchChange('{{item}}')">
         </md-switch>
     </div>
+
+
+</div>

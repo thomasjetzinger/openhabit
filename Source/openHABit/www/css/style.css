@@ -101,75 +101,11 @@ p {
     width: 125px;
 }
 
-.nav-view {
-    margin: 20px;
-}
 
 
 
-/* Grid list
-==================================*/
-
-.grid-tile{
-    display: flex;
-    justify-content: space-around;
-    /*align-content: space-around;*/
-    align-items: center;
-    /*flex-direction: row;*/
-    margin: auto;  /* Magic */
-    width: 1000px;
-    height: 10px;
-}
-
-.openHABitDynamicTiles md-icon {
-    width: 100%;
-    height: 100%; }
-.openHABitDynamicTiles md-icon svg {
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%; }
-.openHABitDynamicTiles .s64 {
-    font-size: 64px; }
-.openHABitDynamicTiles .s32 {
-    font-size: 48px; }
-.openHABitDynamicTiles md-icon.fa {
-    display: block;
-    padding-left: 0; }
-.openHABitDynamicTiles md-icon.s32 span {
-    padding-left: 8px; }
-.openHABitDynamicTiles md-grid-list {
-    margin: 8px; }
-.openHABitDynamicTiles .gray {
-    background: #f5f5f5; }
-.openHABitDynamicTiles .green {
-    background: #b9f6ca; }
-.openHABitDynamicTiles .yellow {
-    background: #ffff8d; }
-.openHABitDynamicTiles .blue {
-    background: #84ffff; }
-.openHABitDynamicTiles .darkBlue {
-    background: #80d8ff; }
-.openHABitDynamicTiles .deepBlue {
-    background: #448aff; }
-.openHABitDynamicTiles .purple {
-    background: #b388ff; }
-.openHABitDynamicTiles .lightPurple {
-    background: #8c9eff; }
-.openHABitDynamicTiles .red {
-    background: #ff8a80; }
-.openHABitDynamicTiles .pink {
-    background: #ff80ab; }
-.openHABitDynamicTiles md-grid-tile {
-    transition: all 300ms ease-out 50ms; }
-.openHABitDynamicTiles md-grid-tile md-icon {
-    padding-bottom: 32px; }
-.openHABitDynamicTiles md-grid-tile md-grid-tile-footer {
-    background: rgba(0, 0, 0, 0.68);
-    height: 36px; }
-.openHABitDynamicTiles md-grid-tile-footer figcaption {
-    width: 100%; }
-.openHABitDynamicTiles md-grid-tile-footer figcaption h3 {
-    margin: 0;
-    font-weight: 700;
-    width: 100%;
-    text-align: center; }
+.subheaderdemoBasicUsage .face {
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    width: 48px;
+    margin: 16px; }

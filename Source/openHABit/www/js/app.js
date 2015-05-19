@@ -5,55 +5,67 @@
 // the 2nd parameter is an array of 'requires'
 var $stateProviderRef = null;
 
-var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdIcons','ngStorage', 'SitemapServices', 'SiteMapContentServiceModule'])
+var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdIcons', 'ngStorage', 'SitemapServices', 'SiteMapContentServiceModule'])
 
 
     .config(function ($mdGestureProvider) {
         $mdGestureProvider.skipClickHijack();
     })
+    .config(['$httpProvider', function ($httpProvider) {
+        //Enable cross domain calls
+        $httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
+        $httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
+        $httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+        $httpProvider.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET,POST,PUT,HEAD,DELETE,OPTIONS';
+
+        //$httpProvider.interceptors.push('TokenInterceptor');
+    }])
+
     .config(['$stateProvider', '$urlRouterProvider', '$ionicConfigProvider',
         function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-        // Turn off caching for demo simplicity's sake
-        $ionicConfigProvider.views.maxCache(0);
-
-        $stateProvider.state('app', {
-            url: "/app",
-            abstract: true,
-            templateUrl: "screens/menu.html"
-        })
-           .state('app.loading', {
-                url: "/loading",
-                resolve: {
-                    sitemapName:  function () {
-                        return "Main"
-                    }
-
-                },
-                views: {
-                    'menuContent': {
-                        templateUrl: "screens/loading.html",
-                        controller: 'LoadingController'
-                    }
-                }
+            // Turn off caching for demo simplicity's sake
+            $ionicConfigProvider.views.maxCache(0);
+            $ionicConfigProvider.backButton.text('');
+            $stateProvider.state('app', {
+                url: "/app",
+                abstract: true,
+                templateUrl: "screens/menu.html"
             })
+                .state('app.loading', {
+                    url: "/loading",
+                    resolve: {
+                        sitemapName: function () {
+                            return "Main"
+                        }
 
-            .state('app.settings', {
-                url: "/settings",
-                views: {
-                    'menuContent': {
-                        templateUrl: "screens/settings.html"
+                    },
+                    views: {
+                        'menuContent': {
+                            templateUrl: "screens/loading.html",
+                            controller: 'LoadingController'
+                        }
                     }
-                }
-            })
+                })
 
-            .state('app.about', {
-                url: "/about",
-                views: {
-                    'menuContent': {
-                        templateUrl: "screens/about.html"
+                .state('app.settings', {
+                    url: "/settings",
+                    views: {
+                        'menuContent': {
+                            templateUrl: "screens/settings.html"
+                        }
                     }
-                }
-            });
+                })
+
+                .state('app.about', {
+                    url: "/about",
+                    views: {
+                        'menuContent': {
+                            templateUrl: "screens/about.html"
+                        }
+                    }
+                });
 
 
             // store for use in loading controller
@@ -65,13 +77,13 @@ var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdI
             console.log("otherwise");
 
             // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/loading');
-    }]).run(function ($ionicPlatform, $localStorage) {
+            $urlRouterProvider.otherwise('/app/loading');
+        }]).run(function ($ionicPlatform, $localStorage) {
 
 
         $localStorage.$default({
             url: 'http://demo.openhab.org:8080',
-            rating1:  3
+            rating1: 3
         });
         //todo remove reset function
         //$localStorage.$reset();

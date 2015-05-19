@@ -4,7 +4,7 @@
         <md-content class="md-default-theme" flex layout-fill style="height: 100%">
 
             <div layout="column" flex class="ng-scope">
-                <section>
+                <!--<section>-->
 
 
 
@@ -13,20 +13,22 @@
                                       ng-switch="item.type">
 
                             <div  data-ng-switch-when="Frame">
-                                {{item.label}}
-                                <!--<md-subheader class="md-primary">{{item.label}}</md-subheader>-->
+                                <md-subheader class="md-primary">{{item.label}}</md-subheader>
                             </div>
 
-                            <div  data-ng-switch-when="Group">
+                             <div  data-ng-switch-when="Group" class="md-list-item-text">
                                 <ng-include src="'widgets/group.html'" ></ng-include>
                             </div>
 
-                            <div  data-ng-switch-when="Switch">
+                            <div  data-ng-switch-when="Switch" class="md-list-item-text">
                                 <ng-include src="'widgets/switch.html'" ></ng-include>
                             </div>
 
-                            <div  data-ng-switch-when="Text">
+                            <div  data-ng-switch-when="Text" class="md-list-item-text">
                                 <ng-include src="'widgets/text.html'" ></ng-include>
+                            </div>
+                            <div  data-ng-switch-default class="md-list-item-text">
+                                {{item.label}}
                             </div>
 
 
@@ -34,7 +36,7 @@
                         </md-list-item>
                     </md-list>
                     <div ng-repeat-end=""></div>
-                </section>
+                <!--</section>-->
 
             </div>
 

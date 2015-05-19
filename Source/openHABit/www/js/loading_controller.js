@@ -3,13 +3,17 @@
  */
 
 openHabitModule.controller('LoadingController', ['$scope', '$rootScope', '$state', 'Sitemaps', 'Sitemap', 'StateCreator',
-    'SiteMapContentService', '$ionicHistory',
-    function ($scope, $rootScope, $state, Sitemaps, Sitemap, StateCreator, SiteMapContentService, $ionicHistory) {
+    'SiteMapContentService', '$ionicHistory', '$ionicLoading',
+    function ($scope, $rootScope, $state, Sitemaps, Sitemap, StateCreator, SiteMapContentService, $ionicHistory,$ionicLoading) {
         console.log("query sitemaps");
+        $ionicLoading.show({
+            template: 'loading'
+        });
         var sitemaps = Sitemaps.query();
 
         sitemaps.$promise.then(function (sitemaps_result) {
             var index = 0;
+            var startState;
             // create array if sitemap_result has only one sitemap
             if(angular.isArray(sitemaps_result.sitemap) === false)
                 sitemaps_result.sitemap = [sitemaps_result.sitemap];
@@ -27,20 +31,29 @@ openHabitModule.controller('LoadingController', ['$scope', '$rootScope', '$state
                     sitemaps_result.sitemap[index].widgetCollection = widgetCollection;
                     sitemaps_result.sitemap[index].id = 'app.' + homepage.id;
 
+                    if(index == 0){
+                        startState = homepage.id;
+                    }
+
                     index = index + 1;
 
                     if(index >= sitemaps_result.sitemap.length){
                         SiteMapContentService.setSitemaps(sitemaps_result.sitemap);
                         $rootScope.$broadcast('sitemaps:updated', sitemaps_result.sitemap);
+                        $ionicLoading.hide();
                         $ionicHistory.nextViewOptions({
                             disableAnimate: true,
                             disableBack: true
                         });
-                        $state.go('app.' + homepage.id);
+
+                        $state.go('app.' + startState);
+
                     }
                 });
 
             });
+
+
         });
 
     }]);
@@ -59,7 +72,7 @@ function iterateWidgets(stateName, widgets, StateCreator, $state, widgetCollecti
         if ($state.get(stateName) == null) {
             openHabitModule.stateProvider.state(stateName, newState);
 
-            console.log("create state " + stateName);
+            //console.log("create state " + stateName);
 
         }
     }
@@ -69,7 +82,7 @@ function iterateWidgets(stateName, widgets, StateCreator, $state, widgetCollecti
 
     angular.forEach(widgets, function (widget) {
 
-        console.log(widget.widgetId);
+        //console.log(widget.widgetId);
 
         if (widget.linkedPage) {
             iterateWidgets(stateName + "." + widget.linkedPage.id, widget.linkedPage.widget, StateCreator, $state,widgetCollection, true);
