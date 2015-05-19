@@ -22,6 +22,25 @@ sitemapServices.factory('Sitemap', ['$resource',
 
     }]);
 
+sitemapServices.factory('Item', ['$resource',
+    function ($resource) {
+        return function (url) {
+            return $resource(url + '/state',{}, {
+                    update: {
+                        method: 'PUT', params: {}, isArray: false,
+                        headers: {
+                            'Content-Type': 'text/plain; charset=UTF-8'/*,
+                            'Access-Control-Allow-Origin': ' *',
+                            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+                            'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept, Authorization, X-Request-With'*/
+                        }
+                    }
+                });
+            }
+    }]);
+
+
+
 
 sitemapServices.factory('StateCreator', [function() {
 

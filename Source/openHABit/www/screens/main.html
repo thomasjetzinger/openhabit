@@ -34,7 +34,7 @@
                                     {{item.label}}
                                 </div>
                                 <div flex="30" layout="row" layout-align="space-around center">
-                                    <md-switch ng-model="item.state" aria-label="Switch 1">
+                                    <md-switch ng-model="item.state" aria-label="Switch 1" ng-change="onSwitchChange('{{item}}')">
                                     </md-switch>
                                 </div>
 
