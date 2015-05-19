@@ -1,14 +1,13 @@
-<div flex layout="row">
+<div flex layout="row" data-ng-switch-when="Switch" layout="row"
+     layout-align="space-around center">
 
-    <div flex-grow="1" layout="row" layout-align="center">
+    <div flex="30" layout="row" layout-align="space-around center">
         <img ng-src="img/icons/openhab/{{item.icon}}.png" alt="img/icons/openhab/{{item.icon}}.png">
     </div>
-    <div flex-grow="1" layout="row" layout-align="space-around center">
+    <div flex="40" layout="row" layout-align="space-around center">
         {{item.label}}
     </div>
-    <div flex-grow="1" layout="row" layout-align="space-around center">
-        <md-switch ng-model="item.state" aria-label="Switch 1">
+    <div flex="30" layout="row" layout-align="space-around center">
+        <md-switch ng-model="item.state" aria-label="Switch 1" ng-change="onSwitchChange('{{item}}')">
         </md-switch>
     </div>
-
-</div>

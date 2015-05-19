@@ -70,7 +70,7 @@ var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdI
 
 
         $localStorage.$default({
-            url: 'http://127.0.0.1:8080',
+            url: 'http://demo.openhab.org:8080',
             rating1:  3
         });
         //todo remove reset function
