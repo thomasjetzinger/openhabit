@@ -7,8 +7,8 @@ var sitemapServices = angular.module('SitemapServices', ['ngResource','ngStorage
 sitemapServices.factory('Sitemaps', ['$resource','$localStorage',
     function ($resource,$localStorage) {
 
-        return $resource($localStorage.url+'/rest/sitemaps?type=jsonp&jsoncallback=JSON_CALLBACK', {}, {
-            query: {method: 'JSONP', params: {sitemap: 'sitemap'}, isArray: false}
+        return $resource($localStorage.url+'/rest/sitemaps', {}, {
+            query: {method: 'JSONP', params: {type: 'jsonp', jsoncallback: 'JSON_CALLBACK' }, isArray: false}
         });
     }]);
 
@@ -36,7 +36,7 @@ sitemapServices.factory('StateCreator', [function() {
                         return stateName;
                     },
                     sitemapContent: function (SiteMapContentService) {
-                        //console.log("resolve sitemapContent for " + stateName + "\n");
+                        console.log("resolve sitemapContent for " + stateName + "\n");
                         return SiteMapContentService.getItem(stateName);
                     }
                 },

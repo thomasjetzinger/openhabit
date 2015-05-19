@@ -52,7 +52,7 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
             getItem: function (_id) {
                 console.log("SiteMapContentService getItem called for id " + _id);
                 var result_sitemap = sitemaps.filter(function (obj) {
-                    if (obj.id == _id) {
+                    if (_id.indexOf(obj.id) >= 0) {
                         return obj
                     }
                 });
