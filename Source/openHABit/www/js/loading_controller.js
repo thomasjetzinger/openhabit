@@ -3,8 +3,8 @@
  */
 
 openHabitModule.controller('LoadingController', ['$scope', '$rootScope', '$state', 'Sitemaps', 'Sitemap', 'StateCreator',
-    'SiteMapContentService', '$ionicHistory',
-    function ($scope, $rootScope, $state, Sitemaps, Sitemap, StateCreator, SiteMapContentService, $ionicHistory) {
+    'SiteMapContentService', 'Page', '$ionicHistory',
+    function ($scope, $rootScope, $state, Sitemaps, Sitemap, StateCreator, SiteMapContentService, Page, $ionicHistory) {
         console.log("query sitemaps");
         var sitemaps = Sitemaps.query();
 
@@ -43,6 +43,19 @@ openHabitModule.controller('LoadingController', ['$scope', '$rootScope', '$state
             });
         });
 
+        $rootScope.$on('$stateChangeStart',
+            function(event, toState, toParams, fromState, fromParams){
+                console.log("from " + fromState + " to " + toState);
+
+                //var page = SiteMapContentService.getItem(toState.name);
+
+                var page = Page(toState.name.substr(toState.name.lastIndexOf(".") + 1)).query();
+
+                page.$promise.then(function (page) {
+                    SiteMapContentService.setItem('app.' + page.id, page.widget);
+                });
+
+            });
     }]);
 
 function iterateWidgets(stateName, widgets, StateCreator, $state, widgetCollection, createNewState) {
