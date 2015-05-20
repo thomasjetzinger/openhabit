@@ -3,8 +3,8 @@
  */
 
 openHabitModule.controller('LoadingController', ['$scope', '$rootScope', '$state', 'Sitemaps', 'Sitemap', 'StateCreator',
-    'SiteMapContentService', 'Page', '$ionicHistory',
-    function ($scope, $rootScope, $state, Sitemaps, Sitemap, StateCreator, SiteMapContentService, Page, $ionicHistory) {
+    'ModelService', 'Page', '$ionicHistory',
+    function ($scope, $rootScope, $state, Sitemaps, Sitemap, StateCreator, ModelService, Page, $ionicHistory) {
         console.log("query sitemaps");
         var sitemaps = Sitemaps.query();
 
@@ -30,7 +30,7 @@ openHabitModule.controller('LoadingController', ['$scope', '$rootScope', '$state
                     index = index + 1;
 
                     if(index >= sitemaps_result.sitemap.length){
-                        SiteMapContentService.setSitemaps(sitemaps_result.sitemap);
+                        ModelService.setSitemaps(sitemaps_result.sitemap);
                         $rootScope.$broadcast('sitemaps:updated', sitemaps_result.sitemap);
                         $ionicHistory.nextViewOptions({
                             disableAnimate: true,
@@ -47,12 +47,12 @@ openHabitModule.controller('LoadingController', ['$scope', '$rootScope', '$state
             function(event, toState, toParams, fromState, fromParams){
                 console.log("from " + fromState + " to " + toState);
 
-                //var page = SiteMapContentService.getItem(toState.name);
+                //var page = ModelService.getItem(toState.name);
 
                 var page = Page(toState.name.substr(toState.name.lastIndexOf(".") + 1)).query();
 
                 page.$promise.then(function (page) {
-                    SiteMapContentService.setItem('app.' + page.id, page.widget);
+                    ModelService.setItem('app.' + page.id, page.widget);
                 });
 
             });
