@@ -9,8 +9,7 @@ openHabitModule.controller('MenuController', ['$scope','$state', 'ModelService',
     });
 
     $scope.onClick = function(id) {
-        console.log(id);
-        ModelService.setCurrentSitemap(id);
+        ModelService.setCurrentSitemap(id.substring(4,id.length));
         $ionicHistory.nextViewOptions({
             disableAnimate: true,
             disableBack: true

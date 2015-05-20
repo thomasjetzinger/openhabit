@@ -9,7 +9,7 @@
                     <h3>Connection</h3>
                     <md-input-container>
                         <label>OpenHAB URL</label>
-                        <input  required name="url" ng-model="$storage.url">
+                        <input  required name="url" ng-change="urlChanged()" ng-model="url">
 
                         <div ng-messages="settingsForm.url.$error">
                             <div ng-message="required">This is required.</div>
@@ -23,7 +23,7 @@
                     </md-checkbox>
                     <md-input-container>
                         <label>User Name</label>
-                        <input ng-model="$storage.username" ng-disabled="!$storage.BasicAuthentication">
+                        <input  ng-model="$storage.username" ng-disabled="!$storage.BasicAuthentication">
                     </md-input-container>
                     <md-input-container>
                         <label>Password</label>

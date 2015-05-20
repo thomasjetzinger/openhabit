@@ -88,7 +88,8 @@ var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdI
         $http.defaults.headers.common['Authorization'] = 'Basic ' + encodedUserNameAndPassword;
 
         $localStorage.$default({
-            url: 'http://demo.openhab.org:8080'
+            url: 'demo.openhab.org:8080',
+            protocol: "http://"
         });
 
 

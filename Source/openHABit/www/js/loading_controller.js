@@ -11,7 +11,7 @@ openHabitModule.controller('LoadingController', ['$scope', '$rootScope', '$state
         sitemaps.$promise.then(function (sitemaps_result) {
             var index = 0;
             // create array if sitemap_result has only one sitemap
-            if(angular.isArray(sitemaps_result.sitemap) === false)
+            if (angular.isArray(sitemaps_result.sitemap) === false)
                 sitemaps_result.sitemap = [sitemaps_result.sitemap];
 
             angular.forEach(sitemaps_result.sitemap, function (sitemap) {
@@ -21,16 +21,17 @@ openHabitModule.controller('LoadingController', ['$scope', '$rootScope', '$state
                     var homepage = sitemap_content_result.homepage;
                     var widgetCollection = [];
 
-                    console.log("result received for app " + sitemap_content_result);
-
                     iterateWidgets('app.' + homepage.id, homepage.widget, StateCreator, $state, widgetCollection, true);
+                    console.log("result received for app " + widgetCollection.length);
+
                     sitemaps_result.sitemap[index].widgetCollection = widgetCollection;
                     sitemaps_result.sitemap[index].id = 'app.' + homepage.id;
 
                     index = index + 1;
 
-                    if(index >= sitemaps_result.sitemap.length){
+                    if (index >= sitemaps_result.sitemap.length) {
                         ModelService.setSitemaps(sitemaps_result.sitemap);
+                        ModelService.setCurrentSitemap(homepage.id);
                         $rootScope.$broadcast('sitemaps:updated', sitemaps_result.sitemap);
                         $ionicHistory.nextViewOptions({
                             disableAnimate: true,
@@ -59,26 +60,26 @@ function iterateWidgets(stateName, widgets, StateCreator, $state, widgetCollecti
         if ($state.get(stateName) == null) {
             openHabitModule.stateProvider.state(stateName, newState);
 
-            console.log("create state " + stateName);
+            //console.log("create state " + stateName);
 
         }
     }
 
-    if(angular.isArray(widgets) === false)
+    if (angular.isArray(widgets) === false)
         widgets = [widgets];
 
     angular.forEach(widgets, function (widget) {
 
-        console.log(widget.widgetId);
+        //console.log(widget.widgetId);
 
         if (widget.linkedPage) {
-            iterateWidgets(stateName + "." + widget.linkedPage.id, widget.linkedPage.widget, StateCreator, $state,widgetCollection, true);
-        } else  if(widget.widget) {
-            if(widget.type === "Frame")
-                // Frames are flattered, so don't add them to the state collection
-                iterateWidgets(stateName, widget.widget, StateCreator, $state,widgetCollection, false);
+            iterateWidgets(stateName + "." + widget.linkedPage.id, widget.linkedPage.widget, StateCreator, $state, widgetCollection, true);
+        } else if (widget.widget) {
+            if (widget.type === "Frame")
+            // Frames are flattered, so don't add them to the state collection
+                iterateWidgets(stateName, widget.widget, StateCreator, $state, widgetCollection, false);
             else
-                iterateWidgets(stateName + "." + widget.widgetId, widget.widget, StateCreator, $state,widgetCollection, true);
+                iterateWidgets(stateName + "." + widget.widgetId, widget.widget, StateCreator, $state, widgetCollection, true);
         }
     });
 }
