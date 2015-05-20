@@ -22,6 +22,18 @@ sitemapServices.factory('Sitemap', ['$resource',
 
     }]);
 
+sitemapServices.factory('Page', ['$resource', '$localStorage',
+    function ($resource, $localStorage) {
+        return function(page){
+            //TODO make sitemap name dynamic
+            return $resource($localStorage.url+'/rest/sitemaps/demo/' + page, {}, {
+                query: {method: 'JSONP', params: {time: new Date().getMilliseconds(), type: 'jsonp', jsoncallback: 'JSON_CALLBACK' } ,isArray: false}
+            });
+        }
+    }]);
+
+
+
 sitemapServices.factory('Item', ['$resource',
     function ($resource) {
         return function (url) {
@@ -29,8 +41,8 @@ sitemapServices.factory('Item', ['$resource',
                     update: {
                         method: 'PUT', params: {}, isArray: false,
                         headers: {
-                            'Content-Type': 'text/plain; charset=UTF-8'/*,
-                            'Access-Control-Allow-Origin': ' *',
+                            'Content-Type': 'text/plain; charset=UTF-8',
+                            'Access-Control-Allow-Origin': ' *'/*,
                             'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
                             'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept, Authorization, X-Request-With'*/
                         }
