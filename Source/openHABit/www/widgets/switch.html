@@ -1,37 +1,77 @@
 <!--Choice-->
-<div flex layout="row"
-     layout-align="space-around center" ng-if="item.mapping != null">
+<div class="container_parent"
+     ng-show="item.mapping !== undefined"
+     ng-attr-ng-click="navigateTo('{{sitemapData.linkedState}}.{{item.linkedPage.id}}')">
 
-
-    <div flex="20" layout-align="space-around center">
+    <div class="container_icon">
         <img ng-src="img/icons/openhab/{{item.icon}}.png" alt="img/icons/openhab/{{item.icon}}.png">
     </div>
-    <div flex="30" layout-align="center">
+    <div class="container_label">
         {{item.label}}
     </div>
-    <div flex="50" layout-align="space-around center">
+    <div class="container_value">
         <md-select placeholder="{{item.label}}" ng-model="pickedValue">
             <md-option ng-repeat="entry in item.mapping">{{entry.label}}</md-option>
         </md-select>
     </div>
-
+    <div class="container_arrow">
+        <ng-md-icon ng-show="item.linkedPage !== undefined"
+                    icon="navigate_next"></ng-md-icon>
+    </div>
 
 </div>
 
 <!--Switch-->
-<div flex layout="row"
-     layout-align="space-around center" ng-if="item.mapping == null">
-    <div flex="20" layout="row" layout-align="space-around center">
+<div class="container_parent"
+     ng-show="item.item.type == 'SwitchItem'"
+     ng-attr-ng-click="navigateTo('{{sitemapData.linkedState}}.{{item.linkedPage.id}}')">
+
+    <div class="container_icon">
         <img ng-src="img/icons/openhab/{{item.icon}}.png" alt="img/icons/openhab/{{item.icon}}.png">
     </div>
-    <div flex="40" layout="row" layout-align="space-around center">
+    <div class="container_label">
         {{item.label}}
     </div>
-    <div flex="30" layout="row" layout-align="space-around center">
-        <md-switch ng-model="item.item.state" ng-true-value="'ON'" ng-false-value="'OFF'" aria-label="{{item.label}}"
+    <div class="container_value">
+        <md-switch ng-model="item.item.state" ng-true-value="'ON'" ng-false-value="'OFF'"
+                   aria-label="{{item.label}}"
                    ng-change="onSwitchChange('{{item}}')">
         </md-switch>
     </div>
+    <div class="container_arrow">
+        <ng-md-icon ng-show="item.linkedPage !== undefined"
+                    icon="navigate_next"></ng-md-icon>
+    </div>
 
+</div>
+
+<!--RollershutterItem-->
+<div class="container_parent"
+     ng-show="item.item.type == 'RollershutterItem'"
+     ng-attr-ng-click="navigateTo('{{sitemapData.linkedState}}.{{item.linkedPage.id}}')">
+
+    <div class="container_icon">
+        <img ng-src="img/icons/openhab/{{item.icon}}.png" alt="img/icons/openhab/{{item.icon}}.png">
+    </div>
+    <div class="container_label">
+        {{item.label}}
+    </div>
+    <div class="container_value">
+        <md-button class="md-icon-button" aria-label="Up">
+            <md-icon md-svg-src="img/icons/simple/move-up.svg" style="color: greenyellow;"></md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button" aria-label="Stop">
+            <md-icon md-svg-src="img/icons/simple/minus.svg" style="color: greenyellow;"></md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button" aria-label="Down">
+            <md-icon md-svg-src="img/icons/simple/move-down.svg" style="color: greenyellow;"></md-icon>
+        </md-button>
+    </div>
+    <div class="container_arrow">
+        <ng-md-icon ng-show="item.linkedPage !== undefined"
+                    icon="navigate_next"></ng-md-icon>
+    </div>
 
 </div>

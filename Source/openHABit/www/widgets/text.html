@@ -1,18 +1,56 @@
-<div flex layout="row" layout="row"
-     layout-align="space-around center" ng-attr-ng-click="navigateTo('{{sitemapData.linkedState}}.{{item.linkedPage.id}}')">
+<!-- Number Item-->
+<div class="container_parent"
+     ng-show="item.item.type == 'NumberItem'"
+     ng-attr-ng-click="navigateTo('{{sitemapData.linkedState}}.{{item.linkedPage.id}}')">
 
-    <div flex="30" layout="row" layout-align="space-around center">
+    <div class="container_icon">
         <img ng-src="img/icons/openhab/{{item.icon}}.png" alt="img/icons/openhab/{{item.icon}}.png">
     </div>
-    <div flex="40" layout="row" layout-align="space-around center">
-        {{item.label}}
+    <div class="container_label" >
+        {{item.label.substring(0,item.label.lastIndexOf('['))}}
     </div>
-    <div flex="30" layout="row" layout-align="space-around center">
-        {{item.state}}
-        <div  flex="30" layout="row" layout-align="space-around center" ng-show="sitemapData.linkedState != null">
-            <ng-md-icon icon="navigate_next"></ng-md-icon>
-        </div>
+    <div class="container_value">
+        {{item.item.state| number:2}} {{item.label.substring(item.label.lastIndexOf(' '),item.label.lastIndexOf(']'))}}
+    </div>
+    <div class="container_arrow"  >
+        <ng-md-icon ng-show="item.linkedPage !== undefined" icon="navigate_next" ></ng-md-icon>
     </div>
 
+</div>
+
+<!--DateTimeItem-->
+<div class="container_parent"
+     ng-show="item.item.type == 'DateTimeItem'"
+     ng-attr-ng-click="navigateTo('{{sitemapData.linkedState}}.{{item.linkedPage.id}}')">
+
+    <div class="container_icon">
+        <img ng-src="img/icons/openhab/{{item.icon}}.png" alt="img/icons/openhab/{{item.icon}}.png">
+    </div>
+    <div class="container_label" >
+        {{item.label.substring(0,item.label.lastIndexOf('['))}}
+    </div>
+    <div class="container_value">
+       {{item.label.substring(item.label.lastIndexOf('[')+1,item.label.lastIndexOf(']'))}}
+    </div>
+    <div class="container_arrow"  >
+        <ng-md-icon ng-show="item.linkedPage !== undefined" icon="navigate_next" ></ng-md-icon>
+    </div>
+
+</div>
+
+<!--Text only-->
+<div class="container_parent"
+     ng-show="item.item.type === undefined"
+     ng-attr-ng-click="navigateTo('{{sitemapData.linkedState}}.{{item.linkedPage.id}}')">
+
+    <div class="container_icon">
+        <img ng-src="img/icons/openhab/{{item.icon}}.png" alt="img/icons/openhab/{{item.icon}}.png">
+    </div>
+    <div class="container_label" >
+        {{item.label}}
+    </div>
+    <div class="container_arrow"  >
+        <ng-md-icon ng-show="item.linkedPage !== undefined" icon="navigate_next" ></ng-md-icon>
+    </div>
 
 </div>

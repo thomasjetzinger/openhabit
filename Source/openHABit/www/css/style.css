@@ -109,3 +109,46 @@ p {
     border: 1px solid #ddd;
     width: 48px;
     margin: 16px; }
+
+/*widget */
+
+.container_parent{
+    display: flex; /* or inline-flex */
+    justify-content: center;
+    align-items:  center;
+    flex-direction: row;
+}
+.container_icon{
+    margin-left: 10%;
+    display: flex; /* or inline-flex */
+    justify-content: center;
+    align-items:  center;
+    flex-direction: row;
+    flex: 10;
+}
+
+.container_label{
+     display: flex; /* or inline-flex */
+     justify-content: center;
+     align-items:  center;
+     flex-direction: row;
+     flex: 35;
+ }
+
+.container_value{
+    display: flex; /* or inline-flex */
+    justify-content: center;
+    align-items:  center;
+    flex-direction: row;
+    flex: 30;
+}
+
+
+
+.container_arrow{
+    /*display: flex; /!* or inline-flex *!/*/
+    /*justify-content: flex-start;*/
+    /*align-items:  center;*/
+    /*flex-direction: row;*/
+    width: 10%;
+}

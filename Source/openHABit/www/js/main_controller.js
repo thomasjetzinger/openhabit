@@ -27,6 +27,7 @@ openHabitModule.controller('mainController', function ($scope, $state, sitemapCo
         // Code you want executed every time view is opened
         console.log(sitemapName+ ' Opened!')
         if($scope.ws === undefined){
+            //todo gen unique tracking id
             console.log('ws://'+$localStorage.url+'/rest/sitemaps/'+ModelService.getCurrentSitemapId()+'/'+$scope.pageId+'?X-Atmosphere-tracking-id=a5c1f99f-e88b-3266-cbce-f461bfbfe14d&X-Atmosphere-Framework=0.9&X-Atmosphere-Transport=websocket&X-Cache-Date=0&Accept=application%2Fjson');
 
             $scope.ws = $websocket.$new('ws://'+$localStorage.url+'/rest/sitemaps/'+ModelService.getCurrentSitemapId()+'/'+$scope.pageId+'?X-Atmosphere-tracking-id=a5c1f99f-e88b-3266-cbce-f461bfbfe14d&X-Atmosphere-Framework=0.9&X-Atmosphere-Transport=websocket&X-Cache-Date=0&Accept=application%2Fjson'); // instance of ngWebsocket, handled by $websocket service
@@ -36,12 +37,6 @@ openHabitModule.controller('mainController', function ($scope, $state, sitemapCo
 
             });
 
-            $scope.ws.$on('received', function (data) {
-                console.log('received The websocket server has sent the following data:');
-                console.log(data);
-
-                //ws.$close();
-            });
 
             $scope.ws.$on('$message', function (data) {
                 console.log('$message The websocket server has sent the following data:');
