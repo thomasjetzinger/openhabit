@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 var $stateProviderRef = null;
 
-var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdIcons', 'ngStorage', 'ngWebsocket', 'SitemapServices'])
+var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdIcons', 'ngStorage','ngWebsocket', 'SitemapServices'])
 
 
     .config(function ($mdGestureProvider) {
@@ -78,15 +78,19 @@ var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdI
 
             // if none of the above states are matched, use this as the fallback
             $urlRouterProvider.otherwise('/app/loading');
-        }]).run(function ($ionicPlatform, $localStorage) {
+        }])
 
+    .run(function ($ionicPlatform, $localStorage, $http,$base64) {
+
+        // Define a new http header,
+        // that will be used for each new xhr request
+        var encodedUserNameAndPassword = $base64.encode( $localStorage.username + ":"+$localStorage.password);
+        $http.defaults.headers.common['Authorization'] = 'Basic ' + encodedUserNameAndPassword;
 
         $localStorage.$default({
-            url: 'http://demo.openhab.org:8080',
-            rating1: 3
+            url: 'http://demo.openhab.org:8080'
         });
-        //todo remove reset function
-        //$localStorage.$reset();
+
 
 
         $ionicPlatform.ready(function ($rootScope) {
