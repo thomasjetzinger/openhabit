@@ -32,13 +32,13 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
         }
 
         function getSitemap(_id) {
-            var sitemap = sitemaps.filter(function (obj) {
-                if (_id.indexOf(obj.id) >= 0) {
-                    return obj;
+            var sitemap = angular.forEach(sitemaps,function(sitemap) {
+                if (_id.indexOf(sitemap.id) >= 0) {
+                    return sitemap;
                 }
             });
 
-            if(angular.isArray(sitemap))
+           if(angular.isArray(sitemap))
                 return sitemap[0];
             else
                 return sitemap;
@@ -50,10 +50,13 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
          */
         function getFullId(_id) {
             if(_id in currentSitemap.widgetCollection == false) {
-                _id = currentSitemap.widgetCollection.filter(function (key) {
-                    if (key.indexOf(_id) >= 0)
-                        return _id;
-                });
+                for(key in currentSitemap.widgetCollection) {
+
+                    console.log("key: " + key);
+                    if (key.indexOf(_id) >= 0) {
+                        return key;
+                    }
+                }
             }
 
             return _id;
@@ -76,7 +79,10 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
             //},
             //
             getItem: function (_id) {
+                _id = getFullId(_id);
+
                 console.log("SiteMapContentService getItem called for id " + _id);
+
                 var result_sitemap = getSitemap(_id);
 
                 if (result_sitemap) {
