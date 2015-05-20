@@ -1,8 +1,7 @@
 
-openHabitModule.controller('gridListCtrl', function($scope, $state, sitemapContent, sitemapName, Item) {
+openHabitModule.controller('mainController', function($scope, $state, sitemapContent, sitemapName, Item) {
 
-    console.log("gridListCtrl " + sitemapName);
-    console.log("gridListCtrl " + sitemapContent);
+
     $scope.sitemapData = sitemapContent;
     $scope.sitemapName = sitemapName;
 

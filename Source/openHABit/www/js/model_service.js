@@ -1,8 +1,7 @@
 /**
  * Created by Jakob on 05.05.2015.
  */
-var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
-    .service('SiteMapContentService', function () {
+openHabitModule.service('ModelService', function () {
         console.log("DataService init");
 
         //var widgetCollection = [];
@@ -76,7 +75,7 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
             //},
             //
             getItem: function (_id) {
-                console.log("SiteMapContentService getItem called for id " + _id);
+                console.log("ModelService getItem called for id " + _id);
                 var result_sitemap = getSitemap(_id);
 
                 if (result_sitemap) {

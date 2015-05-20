@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 var $stateProviderRef = null;
 
-var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdIcons', 'ngStorage', 'SitemapServices', 'SiteMapContentServiceModule'])
+var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdIcons', 'ngStorage', 'SitemapServices'])
 
 
     .config(function ($mdGestureProvider) {

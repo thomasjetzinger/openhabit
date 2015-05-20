@@ -66,15 +66,15 @@ sitemapServices.factory('StateCreator', [function() {
                     sitemapName: function () {
                         return stateName;
                     },
-                    sitemapContent: function (SiteMapContentService) {
+                    sitemapContent: function (ModelService) {
                         console.log("resolve sitemapContent for " + stateName + "\n");
-                        return SiteMapContentService.getItem(stateName);
+                        return ModelService.getItem(stateName);
                     }
                 },
                 views: {
                     'menuContent@app': {
                         templateUrl: "screens/main.html",
-                        controller: 'gridListCtrl'
+                        controller: 'mainController'
                     }
                 }
             };
