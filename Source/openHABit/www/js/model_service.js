@@ -49,7 +49,7 @@ openHabitModule.service('ModelService', function () {
          */
         function getFullId(_id) {
             if(_id in currentSitemap.widgetCollection == false) {
-                for(key in currentSitemap.widgetCollection) {
+                for(var key in currentSitemap.widgetCollection) {
 
                     console.log("key: " + key);
                     if (key.indexOf(_id) >= 0) {

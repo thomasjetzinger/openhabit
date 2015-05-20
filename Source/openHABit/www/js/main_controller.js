@@ -1,15 +1,12 @@
 
-openHabitModule.controller('gridListCtrl', function($scope, $state, sitemapContent, sitemapName, Item, Page, SiteMapContentService) {
-
-    console.log("gridListCtrl " + sitemapName);
-    console.log("gridListCtrl " + sitemapContent);
+openHabitModule.controller('mainController', function($scope, $state, sitemapContent, sitemapName, Item, Page, ModelService) {
 
     var page = Page(sitemapName.substr(sitemapName.lastIndexOf(".") + 1)).query();
 
 
     page.$promise.then(function (page) {
-        SiteMapContentService.setItem(page.id, page.widget);
-        $scope.sitemapData = SiteMapContentService.getItem(page.id);
+        ModelService.setItem(page.id, page.widget);
+        $scope.sitemapData = ModelService.getItem(page.id);
     });
 
     $scope.sitemapData = sitemapContent;
