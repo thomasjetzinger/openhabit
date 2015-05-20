@@ -65,18 +65,7 @@ openHabitModule.service('ModelService', function () {
 
         return {
 
-            //reset: function() {
-            //    widgetCollection = [];
-            //},
-            //
-            //addItem: function(state, widget) {
-            //    //console.log("add widgets for state " + state);
-            //    if(state in widgetCollection)
-            //        widgetCollection[state].push(widget);
-            //    else
-            //        widgetCollection[state] = widget;
-            //},
-            //
+
             getItem: function (_id) {
                 _id = getFullId(_id);
 				
