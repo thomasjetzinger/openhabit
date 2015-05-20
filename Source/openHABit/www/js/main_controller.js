@@ -1,11 +1,12 @@
 
-openHabitModule.controller('mainController', function($scope, $state, sitemapContent, sitemapName, Item, Page, ModelService, $websocket) {
+openHabitModule.controller('mainController', function($scope, $state, sitemapContent, sitemapName, Item, Page, ModelService) {
 
-    var page = Page(sitemapName.substr(sitemapName.lastIndexOf(".") + 1)).query();
+    $scope.pageId = sitemapName.substr(sitemapName.lastIndexOf(".") + 1);
+    var page = Page($scope.pageId).query();
 
     page.$promise.then(function (page) {
         ModelService.setItem(page.id, page.widget);
-        $scope.sitemapData = ModelService.getItem(page.id);
+        $scope.sitemapData = ModelService.getItem($scope.pageId);
     });
 
     $scope.sitemapData = sitemapContent;
@@ -23,51 +24,14 @@ openHabitModule.controller('mainController', function($scope, $state, sitemapCon
     };
 
 
-    var ws = $websocket.$new('ws://demo.openhab.org:8080/rest/sitemaps/demo/FF_Bath?X-Atmosphere-tracking-id=a5c1f99f-e88b-3266-cbce-f461bfbfe14d&X-Atmosphere-Framework=0.9&X-Atmosphere-Transport=websocket&X-Cache-Date=0&Accept=application%2Fjson'); // instance of ngWebsocket, handled by $websocket service
+    $scope.$on('sitemaps_content:updated', function(event,data) {
+        $scope.$apply(function () {
 
-    ws.$on('$open', function () {
-        console.log('Oh my gosh, websocket is really open! Fukken awesome!');
 
-       ws.$emit('ping', 'hi listening websocket server'); // send a message to the websocket server
+        $scope.sitemapData = ModelService.getItem($scope.pageId);
 
-        var data = {
-            level: 1,
-            text: 'ngWebsocket rocks!',
-            array: ['one', 'two', 'three'],
-            nested: {
-                level: 2,
-                deeper: [{
-                    hell: 'yeah'
-                }, {
-                    so: 'good'
-                }]
-            }
-        };
 
-        //ws.$emit('pong', data);
-    });
-
-    ws.$on('received', function (data) {
-        console.log('The websocket server has sent the following data:');
-        console.log(data);
-
-        ws.$close();
-    });
-
-    ws.$on('$message', function(data) {
-        console.log('The websocket server has sent the following data:');
-        console.log(data);
-
-        if(data.widget) {
-            ModelService.setItem(data.widget.widgetId, data.widget);
-            $scope.$apply(function () {
-                $scope.sitemapData = ModelService.getItem(data.widget.widgetId);
-            });
-        }
-    });
-
-    ws.$on('$close', function () {
-        console.log('Noooooooooou, I want to have more fun with ngWebsocket, damn it!');
+        });
     });
 
 

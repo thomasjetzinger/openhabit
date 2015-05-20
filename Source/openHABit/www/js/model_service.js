@@ -1,13 +1,12 @@
 /**
  * Created by Jakob on 05.05.2015.
  */
-openHabitModule.service('ModelService', function () {
+openHabitModule.service('ModelService', function ($websocket,$rootScope) {
         console.log("DataService init");
 
         //var widgetCollection = [];
         var sitemaps = [];
         var currentSitemap;
-
 
         function flatternWidgets(items){
 
@@ -43,6 +42,72 @@ openHabitModule.service('ModelService', function () {
                 return sitemap;
         }
 
+    function setItem(_id,_widgets){
+        _id = getFullId(_id);
+
+        if(angular.isArray(_id)) {
+            // the given id was an id of a widget
+            var stateName = _id[0];
+            var widgetId = _id[1];
+
+            for (var i = 0; i < currentSitemap.widgetCollection[stateName].length; i++) {
+                if (currentSitemap.widgetCollection[stateName][i].widgetId == widgetId) {
+                    currentSitemap.widgetCollection[stateName][i] = _widgets;
+                    console.log(_widgets.item.state);
+                    break;
+                }
+            }
+        } else {
+            currentSitemap.widgetCollection[_id] = _widgets;
+        }
+    }
+
+    var ws = $websocket.$new('ws://demo.openhab.org:8080/rest/sitemaps/demo/FF_Bath?X-Atmosphere-tracking-id=a5c1f99f-e88b-3266-cbce-f461bfbfe14d&X-Atmosphere-Framework=0.9&X-Atmosphere-Transport=websocket&X-Cache-Date=0&Accept=application%2Fjson'); // instance of ngWebsocket, handled by $websocket service
+
+    ws.$on('$open', function () {
+        console.log('Oh my gosh, websocket is really open! Fukken awesome!');
+
+        ws.$emit('ping', 'hi listening websocket server'); // send a message to the websocket server
+
+        var data = {
+            level: 1,
+            text: 'ngWebsocket rocks!',
+            array: ['one', 'two', 'three'],
+            nested: {
+                level: 2,
+                deeper: [{
+                    hell: 'yeah'
+                }, {
+                    so: 'good'
+                }]
+            }
+        };
+
+        //ws.$emit('pong', data);
+    });
+
+    ws.$on('received', function (data) {
+        console.log('The websocket server has sent the following data:');
+        console.log(data);
+
+        ws.$close();
+    });
+
+    ws.$on('$message', function(data) {
+        console.log('The websocket server has sent the following data:');
+        console.log(data);
+
+        if(data.widget) {
+            setItem(data.widget.widgetId, data.widget);
+            $rootScope.$broadcast('sitemaps_content:updated', data.widget);
+
+        }
+    });
+
+    ws.$on('$close', function () {
+        console.log('Noooooooooou, I want to have more fun with ngWebsocket, damn it!');
+    });
+
         /**
          * Gets the full id (e.g. app.demo.0000 from 0000)
          * @param _id state name widgetId
@@ -74,7 +139,7 @@ openHabitModule.service('ModelService', function () {
 
             getItem: function (_id) {
                 _id = getFullId(_id);
-				
+
                 console.log("ModelService getItem called for id " + _id);
 
                 if(angular.isArray(_id))
@@ -99,23 +164,7 @@ openHabitModule.service('ModelService', function () {
             },
 
             setItem: function(_id, _widgets) {
-                _id = getFullId(_id);
-
-                if(angular.isArray(_id)) {
-                    // the given id was an id of a widget
-                    var stateName = _id[0];
-                    var widgetId = _id[1];
-
-                    for (var i = 0; i < currentSitemap.widgetCollection[stateName].length; i++) {
-                        if (currentSitemap.widgetCollection[stateName][i].widgetId == widgetId) {
-                            currentSitemap.widgetCollection[stateName][i] = _widgets;
-                            console.log(_widgets.item.state);
-                            break;
-                        }
-                    }
-                } else {
-                    currentSitemap.widgetCollection[_id] = _widgets;
-                }
+                setItem(_id,_widgets);
             },
 
             setSitemaps: function (_sitemaps) {
