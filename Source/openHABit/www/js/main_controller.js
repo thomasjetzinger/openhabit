@@ -3,7 +3,6 @@ openHabitModule.controller('mainController', function($scope, $state, sitemapCon
 
     var page = Page(sitemapName.substr(sitemapName.lastIndexOf(".") + 1)).query();
 
-
     page.$promise.then(function (page) {
         ModelService.setItem(page.id, page.widget);
         $scope.sitemapData = ModelService.getItem(page.id);
@@ -20,7 +19,7 @@ openHabitModule.controller('mainController', function($scope, $state, sitemapCon
     $scope.onSwitchChange = function( item ) {
         console.log(item + " change");
         itemObj = JSON.parse(item);
-        Item(itemObj.item.link).update(itemObj.state ? "OFF" : "ON"); // only for testing
+        Item(itemObj.item.link).update(itemObj.item.state == "ON" ? "OFF" : "ON"); // only for testing
     };
 
     /*$rootScope.$on('$stateChangeStart',
