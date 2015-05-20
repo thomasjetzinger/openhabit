@@ -60,7 +60,9 @@ openHabitModule.controller('mainController', function($scope, $state, sitemapCon
 
         if(data.widget) {
             ModelService.setItem(data.widget.widgetId, data.widget);
-            $scope.sitemapData = ModelService.getItem(data.widget.widgetId);
+            $scope.$apply(function () {
+                $scope.sitemapData = ModelService.getItem(data.widget.widgetId);
+            });
         }
     });
 
