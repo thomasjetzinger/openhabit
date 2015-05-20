@@ -62,18 +62,7 @@ openHabitModule.service('ModelService', function () {
 
         return {
 
-            //reset: function() {
-            //    widgetCollection = [];
-            //},
-            //
-            //addItem: function(state, widget) {
-            //    //console.log("add widgets for state " + state);
-            //    if(state in widgetCollection)
-            //        widgetCollection[state].push(widget);
-            //    else
-            //        widgetCollection[state] = widget;
-            //},
-            //
+
             getItem: function (_id) {
                 console.log("ModelService getItem called for id " + _id);
                 var result_sitemap = getSitemap(_id);
