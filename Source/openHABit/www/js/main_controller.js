@@ -1,5 +1,6 @@
 openHabitModule.controller('mainController', function ($scope, $state, sitemapContent, sitemapName, Item, Page, ModelService, $websocket, $localStorage) {
 
+
     $scope.pageId = sitemapName.substr(sitemapName.lastIndexOf(".") + 1);
     var page = Page($scope.pageId).query();
 
@@ -22,57 +23,60 @@ openHabitModule.controller('mainController', function ($scope, $state, sitemapCo
         Item(itemObj.item.link).update(itemObj.item.state == "ON" ? "OFF" : "ON"); // only for testing
     };
 
+    $scope.$on('$ionicView.enter', function() {
+        // Code you want executed every time view is opened
+        console.log(sitemapName+ ' Opened!')
+        if($scope.ws === undefined){
+            console.log('ws://'+$localStorage.url+'/rest/sitemaps/'+ModelService.getCurrentSitemapId()+'/'+$scope.pageId+'?X-Atmosphere-tracking-id=a5c1f99f-e88b-3266-cbce-f461bfbfe14d&X-Atmosphere-Framework=0.9&X-Atmosphere-Transport=websocket&X-Cache-Date=0&Accept=application%2Fjson');
 
+            $scope.ws = $websocket.$new('ws://'+$localStorage.url+'/rest/sitemaps/'+ModelService.getCurrentSitemapId()+'/'+$scope.pageId+'?X-Atmosphere-tracking-id=a5c1f99f-e88b-3266-cbce-f461bfbfe14d&X-Atmosphere-Framework=0.9&X-Atmosphere-Transport=websocket&X-Cache-Date=0&Accept=application%2Fjson'); // instance of ngWebsocket, handled by $websocket service
 
+            $scope.ws.$on('$open', function () {
+                console.log(sitemapName+' Websocket is open!');
 
-
-    var ws = $websocket.$new('ws://'+$localStorage.url+'/rest/sitemaps/'+ModelService.getCurrentSitemapId()+'/'+$scope.pageId+'?X-Atmosphere-tracking-id=a5c1f99f-e88b-3266-cbce-f461bfbfe14d&X-Atmosphere-Framework=0.9&X-Atmosphere-Transport=websocket&X-Cache-Date=0&Accept=application%2Fjson'); // instance of ngWebsocket, handled by $websocket service
-
-    ws.$on('$open', function () {
-        console.log('Oh my gosh, websocket is really open! Fukken awesome!');
-
-        ws.$emit('ping', 'hi listening websocket server'); // send a message to the websocket server
-
-        var data = {
-            level: 1,
-            text: 'ngWebsocket rocks!',
-            array: ['one', 'two', 'three'],
-            nested: {
-                level: 2,
-                deeper: [{
-                    hell: 'yeah'
-                }, {
-                    so: 'good'
-                }]
-            }
-        };
-
-        //ws.$emit('pong', data);
-    });
-
-    ws.$on('received', function (data) {
-        console.log('The websocket server has sent the following data:');
-        console.log(data);
-
-        ws.$close();
-    });
-
-    ws.$on('$message', function (data) {
-        console.log('The websocket server has sent the following data:');
-        console.log(data);
-
-        if (data.widget) {
-            setItem(data.widget.widgetId, data.widget);
-            $scope.$apply(function () {
-                $scope.sitemapData = ModelService.getItem($scope.pageId);
             });
 
+            $scope.ws.$on('received', function (data) {
+                console.log('received The websocket server has sent the following data:');
+                console.log(data);
+
+                //ws.$close();
+            });
+
+            $scope.ws.$on('$message', function (data) {
+                console.log('$message The websocket server has sent the following data:');
+                console.log(data);
+
+                if (data.widget) {
+                    ModelService.setItem(data.widget.widgetId, data.widget);
+                    $scope.$apply(function () {
+                        $scope.sitemapData = ModelService.getItem($scope.pageId);
+                    });
+
+                }
+            });
+
+            $scope.ws.$on('$close', function () {
+                console.log(sitemapName + 'Websocket closed!');
+            });
+
+
+        }
+
+    });
+
+    $scope.$on('$ionicView.leave', function() {
+        // Code you want executed every time view is opened
+        console.log(sitemapName+' exit!')
+        if($scope.ws !== undefined) {
+            $scope.ws.$close();
         }
     });
 
-    ws.$on('$close', function () {
-        console.log('Noooooooooou, I want to have more fun with ngWebsocket, damn it!');
-    });
+
+
+
+
 
 
     //$scope.$on('sitemaps_content:updated', function (event, data) {

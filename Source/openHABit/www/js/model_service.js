@@ -49,8 +49,8 @@ openHabitModule.service('ModelService', function ($websocket,$rootScope) {
             // the given id was an id of a widget
             var stateName = _id[0];
             var widgetId = _id[1];
-
-            for (var i = 0; i < sitemaps[currentSitemap].widgetCollection[stateName].length; i++) {
+            //todo currentSitemap is dangerous here, because it could change while loading
+            for (var i = 0; i < currentSitemap.widgetCollection[stateName].length; i++) {
                 if (currentSitemap.widgetCollection[stateName][i].widgetId == widgetId) {
                     currentSitemap.widgetCollection[stateName][i] = _widgets;
                     console.log(_widgets.item.state);
