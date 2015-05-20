@@ -17,14 +17,12 @@ var sitemapContentModule = angular.module('SiteMapContentServiceModule', [])
                 angular.forEach(items, function(item){
                     result.push(item);
                     if(item.type == "Frame"){
-                        item.label = "Frame Label";
                         result = result.concat(flatternWidgets(item.widget));
                     }
                 });
             }else{
                 result.push(items);
                 if(items.type == "Frame"){
-                    items.label = "Frame Label";
                     result = result.concat(flatternWidgets(items.widget));
                 }
             }
