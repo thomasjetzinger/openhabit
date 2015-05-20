@@ -43,19 +43,6 @@ openHabitModule.controller('LoadingController', ['$scope', '$rootScope', '$state
             });
         });
 
-        $rootScope.$on('$stateChangeStart',
-            function(event, toState, toParams, fromState, fromParams){
-                console.log("from " + fromState + " to " + toState);
-
-                //var page = ModelService.getItem(toState.name);
-
-                var page = Page(toState.name.substr(toState.name.lastIndexOf(".") + 1)).query();
-
-                page.$promise.then(function (page) {
-                    ModelService.setItem('app.' + page.id, page.widget);
-                });
-
-            });
     }]);
 
 function iterateWidgets(stateName, widgets, StateCreator, $state, widgetCollection, createNewState) {

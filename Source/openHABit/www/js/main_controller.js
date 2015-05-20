@@ -23,18 +23,5 @@ openHabitModule.controller('mainController', function($scope, $state, sitemapCon
         Item(itemObj.item.link).update(itemObj.state ? "OFF" : "ON"); // only for testing
     };
 
-    /*$rootScope.$on('$stateChangeStart',
-        function(event, toState, toParams, fromState, fromParams){
-            console.log("from " + fromState + " to " + toState);
 
-            //var page = SiteMapContentService.getItem(toState.name);
-
-            var page = Page(toState.name.substr(toState.name.lastIndexOf(".") + 1)).query();
-
-            page.$promise.then(function (page) {
-                SiteMapContentService.setItem('app.' + page.id, page.widget);
-            });
-
-        });
-*/
 });
