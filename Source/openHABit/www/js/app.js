@@ -52,7 +52,7 @@ var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdI
                 .state('app.loading.settings', {
                     url: "/settings",
                     views: {
-                        'menuContent': {
+                        'menuContent@app': {
                             templateUrl: "screens/settings.html"
                         }
                     }

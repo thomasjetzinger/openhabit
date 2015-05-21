@@ -8,6 +8,11 @@ openHabitModule.controller('MenuController', ['$scope','$state', 'ModelService',
         $scope.sitemaps = ModelService.getSitemaps();
     });
 
+    $scope.goToSettings = function () {
+        $state.go('app.loading.settings');
+    };
+
+
     $scope.onClick = function(id) {
         ModelService.setCurrentSitemap(id.substring(4,id.length));
         $ionicHistory.nextViewOptions({
