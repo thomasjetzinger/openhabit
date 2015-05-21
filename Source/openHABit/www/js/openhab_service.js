@@ -2,9 +2,9 @@
  * Created by Thomas Jetzinger on 04/05/2015.
  */
 
-var sitemapServices = angular.module('SitemapServices', ['ngResource','ngStorage']);
+var openHabService = angular.module('OpenHabService', ['ngResource','ngStorage']);
 
-sitemapServices.factory('Sitemaps', ['$resource','$localStorage',
+openHabService.factory('Sitemaps', ['$resource','$localStorage',
     function ($resource,$localStorage) {
 
         return $resource($localStorage.protocol+$localStorage.url+'/rest/sitemaps', {}, {
@@ -12,7 +12,7 @@ sitemapServices.factory('Sitemaps', ['$resource','$localStorage',
         });
     }]);
 
-sitemapServices.factory('Sitemap', ['$resource',
+openHabService.factory('Sitemap', ['$resource',
     function ($resource) {
         return function(url){
             return $resource(url, {}, {
@@ -22,7 +22,7 @@ sitemapServices.factory('Sitemap', ['$resource',
 
     }]);
 
-sitemapServices.factory('Page', ['$resource', '$localStorage','ModelService',
+openHabService.factory('Page', ['$resource', '$localStorage','ModelService',
     function ($resource, $localStorage, ModelService) {
         return function(page){
             return $resource($localStorage.protocol+$localStorage.url+'/rest/sitemaps/'+ModelService.getCurrentSitemapId()+'/' + page, {}, {
@@ -33,7 +33,7 @@ sitemapServices.factory('Page', ['$resource', '$localStorage','ModelService',
 
 
 
-sitemapServices.factory('Item', ['$resource',
+openHabService.factory('Item', ['$resource',
     function ($resource) {
         return function (url) {
             return $resource(url ,{}, {
@@ -51,39 +51,4 @@ sitemapServices.factory('Item', ['$resource',
     }]);
 
 
-sitemapServices.factory('StateCreator', [function() {
 
-        var createState = function (stateName, title) {
-
-            var state = {
-                stateName: stateName,
-                url: "/" + stateName.substring(stateName.lastIndexOf(".") + 1),
-                resolve: {
-
-                    sitemapName: function () {
-                        return stateName;
-                    },
-                    pageTitle: function () {
-                        return title;
-                    },
-                    sitemapContent: function (ModelService) {
-                        console.log("resolve sitemapContent for " + stateName + "\n");
-                        return ModelService.getItem(stateName);
-                    }
-                },
-                views: {
-                    'menuContent@app': {
-                        templateUrl: "screens/main.html",
-                        controller: 'mainController'
-                    }
-                }
-            };
-
-            return state;
-        };
-
-        return {
-            createState: createState
-        }
-    }
-]);

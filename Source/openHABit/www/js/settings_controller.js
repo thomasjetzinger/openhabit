@@ -21,10 +21,5 @@ openHabitModule.controller('SettingsCtrl', function($scope, $localStorage) {
         if($localStorage.url.substring($localStorage.url.length-1,$localStorage.url.length) == "/"){
             $localStorage.url = $localStorage.url.substring(0,$localStorage.url.length-1);
         }
-
-
     };
-
-
-
 });

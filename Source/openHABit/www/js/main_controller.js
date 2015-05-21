@@ -1,6 +1,5 @@
 openHabitModule.controller('mainController', function ($scope, $state, sitemapContent, sitemapName, pageTitle, Item, Page, ModelService, $websocket, $localStorage) {
 
-
     $scope.pageId = sitemapName.substr(sitemapName.lastIndexOf(".") + 1);
     var page = Page($scope.pageId).query();
 
@@ -68,18 +67,4 @@ openHabitModule.controller('mainController', function ($scope, $state, sitemapCo
             $scope.ws.$close();
         }
     });
-
-
-
-
-
-
-
-    //$scope.$on('sitemaps_content:updated', function (event, data) {
-    //    $scope.$apply(function () {
-    //        $scope.sitemapData = ModelService.getItem($scope.pageId);
-    //    });
-    //});
-
-
 });

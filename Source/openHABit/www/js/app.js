@@ -3,9 +3,9 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'openHabit' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var $stateProviderRef = null;
 
-var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdIcons', 'ngStorage','ngWebsocket', 'SitemapServices','ngMessages','base64'])
+var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdIcons', 'ngStorage','ngWebsocket',
+    'OpenHabService', 'StateContentManager', 'ngMessages','base64'])
 
 
     .config(function ($mdGestureProvider) {
@@ -72,7 +72,6 @@ var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdI
 
             console.log("save state provider reference");
             openHabitModule.stateProvider = $stateProvider;
-            $stateProviderRef = $stateProvider;
 
             console.log("otherwise");
 

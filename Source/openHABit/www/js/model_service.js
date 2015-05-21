@@ -4,7 +4,6 @@
 openHabitModule.service('ModelService', function () {
         console.log("DataService init");
 
-        //var widgetCollection = [];
         var sitemaps = [];
         var currentSitemap;
 

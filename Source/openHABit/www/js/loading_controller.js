@@ -55,7 +55,7 @@ function iterateWidgets(stateName, widgets, StateCreator, $state, widgetCollecti
         else
             widgetCollection[stateName] = widgets;
 
-        var newState = StateCreator.createState(stateName, parent ? parent.label : stateName);
+        var newState = StateCreator.createState(stateName, parent ? parent.label : "Home");
 
         if ($state.get(stateName) == null)
             openHabitModule.stateProvider.state(stateName, newState);
