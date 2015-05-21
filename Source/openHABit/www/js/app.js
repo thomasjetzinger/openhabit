@@ -4,8 +4,8 @@
 // 'openHabit' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 
-var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdIcons', 'ngStorage', 'ngWebsocket',
-    'OpenHabService', 'StateContentManager', 'ngMessages', 'base64'])
+var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdIcons', 'ngStorage','ngWebsocket',
+    'OpenHabService', 'StateContentManager', 'ngMessages','base64'])
 
 
     .config(function ($mdGestureProvider) {
@@ -49,8 +49,7 @@ var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdI
                     }
                 })
 
-                .state('app.settings', {
-
+                .state('app.loading.settings', {
                     url: "/settings",
                     views: {
                         'menuContent': {
@@ -80,17 +79,18 @@ var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdI
             $urlRouterProvider.otherwise('/app/loading');
         }])
 
-    .run(function ($ionicPlatform, $localStorage, $http, $base64) {
+    .run(function ($ionicPlatform, $localStorage, $http,$base64) {
 
         // Define a new http header,
         // that will be used for each new xhr request
-        var encodedUserNameAndPassword = $base64.encode($localStorage.username + ":" + $localStorage.password);
+        var encodedUserNameAndPassword = $base64.encode( $localStorage.username + ":"+$localStorage.password);
         $http.defaults.headers.common['Authorization'] = 'Basic ' + encodedUserNameAndPassword;
 
         $localStorage.$default({
             url: 'demo.openhab.org:8080',
             protocol: "http://"
         });
+
 
 
         $ionicPlatform.ready(function ($rootScope) {
