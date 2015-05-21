@@ -119,17 +119,17 @@ p {
     flex-direction: row;
 }
 .container_icon{
-    margin-left: 10%;
+    margin-right: 5%;
     display: flex; /* or inline-flex */
-    justify-content: center;
+    justify-content: flex-end;
     align-items:  center;
     flex-direction: row;
-    flex: 10;
+    width: 15%;
 }
 
 .container_label{
      display: flex; /* or inline-flex */
-     justify-content: center;
+     justify-content: flex-start;
      align-items:  center;
      flex-direction: row;
      flex: 35;
