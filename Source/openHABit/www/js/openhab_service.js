@@ -51,11 +51,9 @@ sitemapServices.factory('Item', ['$resource',
     }]);
 
 
-
-
 sitemapServices.factory('StateCreator', [function() {
 
-        var createState = function (stateName) {
+        var createState = function (stateName, title) {
 
             var state = {
                 stateName: stateName,
@@ -64,6 +62,9 @@ sitemapServices.factory('StateCreator', [function() {
 
                     sitemapName: function () {
                         return stateName;
+                    },
+                    pageTitle: function () {
+                        return title;
                     },
                     sitemapContent: function (ModelService) {
                         console.log("resolve sitemapContent for " + stateName + "\n");

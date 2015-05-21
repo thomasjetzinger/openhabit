@@ -1,7 +1,7 @@
 /**
  * Created by Jakob on 05.05.2015.
  */
-openHabitModule.service('ModelService', function ($websocket,$rootScope) {
+openHabitModule.service('ModelService', function () {
         console.log("DataService init");
 
         //var widgetCollection = [];

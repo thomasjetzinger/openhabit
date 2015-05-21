@@ -1,4 +1,4 @@
-openHabitModule.controller('mainController', function ($scope, $state, sitemapContent, sitemapName, Item, Page, ModelService, $websocket, $localStorage) {
+openHabitModule.controller('mainController', function ($scope, $state, sitemapContent, sitemapName, pageTitle, Item, Page, ModelService, $websocket, $localStorage) {
 
 
     $scope.pageId = sitemapName.substr(sitemapName.lastIndexOf(".") + 1);
@@ -11,6 +11,7 @@ openHabitModule.controller('mainController', function ($scope, $state, sitemapCo
 
     $scope.sitemapData = sitemapContent;
     $scope.sitemapName = sitemapName;
+    $scope.pageTitle = pageTitle;
 
     $scope.navigateTo = function (path) {
         console.log("Navigate to " + path);
