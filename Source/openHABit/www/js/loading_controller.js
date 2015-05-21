@@ -13,8 +13,9 @@ openHabitModule.controller('LoadingController',
         };
 
         // load the first time
-        //$scope.retry();
+       // $scope.retry();
         $scope.isLoading = false;
+        $scope.isError = true;
         $scope.goToSettings = function () {
             $state.go('app.loading.settings');
         };
