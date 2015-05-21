@@ -8,7 +8,12 @@ openHabService.factory('Sitemaps', ['$resource','$localStorage',
     function ($resource,$localStorage) {
 
         return $resource($localStorage.protocol+$localStorage.url+'/rest/sitemaps', {}, {
-            query: {method: 'JSONP', params: {type: 'jsonp', jsoncallback: 'JSON_CALLBACK' }, isArray: false}
+            query: {
+                url:$localStorage.protocol+$localStorage.url+'/rest/sitemaps',
+                method: 'JSONP',
+                params: {type: 'jsonp', jsoncallback: 'JSON_CALLBACK' },
+                isArray: false
+            }
         });
     }]);
 

@@ -1,9 +1,14 @@
 /**
  * Created by Thomas Jetzinger on 24/04/2015.
  */
-openHabitModule.controller('SettingsCtrl', function($scope, $localStorage) {
+openHabitModule.controller('SettingsCtrl', function($scope, $localStorage,$ionicHistory) {
     $scope.$storage = $localStorage;
     $scope.url = $localStorage.url;
+    //todo this is a ugly hack, we rally should find a better way to do this.
+    $ionicHistory.viewHistory().backView.stateId = "app.loading";
+    $ionicHistory.viewHistory().backView.stateName = "app.loading";
+    $ionicHistory.viewHistory().backView.url =   "/app/loading";
+    $ionicHistory.viewHistory().backView.title =   "";
 
     $scope.urlChanged = function () {
 

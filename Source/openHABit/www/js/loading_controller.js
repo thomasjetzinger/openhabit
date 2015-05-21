@@ -3,10 +3,10 @@
  */
 
 openHabitModule.controller('LoadingController',
-    function ($scope, $rootScope, $state, Sitemaps, Sitemap, StateCreator, ModelService, Page, $ionicHistory, $ionicLoading) {
+    function ($scope, $rootScope, $state, Sitemaps, Sitemap, StateCreator, ModelService, Page, $ionicHistory, $localStorage) {
 
         $scope.retry = function () {
-            console.log("LoadingController: query sitemaps");
+            console.log("LoadingController: query sitemaps from "+$localStorage.protocol+$localStorage.url);
             $scope.isLoading = true;
             $scope.isError = false;
             Sitemaps.query().$promise.then(requestSuccess, requestError);
