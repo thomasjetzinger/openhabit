@@ -8,7 +8,7 @@
 
 
                 <md-list>
-                    <md-list-item class="md-3-line" ng-repeat="item in sitemapData.items"
+                    <md-list-item class="md-3-line" ng-repeat="item in sitemapData.items track by item.widgetId"
                                   ng-switch="item.type">
                         <div flex fill>
                             <div data-ng-switch-when="Frame">
