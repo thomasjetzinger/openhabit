@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 
 var openHabitModule = angular.module('openHABit', ['ionic', 'ngMaterial', 'ngMdIcons', 'ngStorage','ngWebsocket',
-    'OpenHabService', 'StateContentManager', 'ngMessages','base64'])
+    'OpenHabService', 'StateContentManager', 'ngMessages','base64', 'QuickList'])
 
 
     .config(function ($mdGestureProvider) {
