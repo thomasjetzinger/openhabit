@@ -21,7 +21,7 @@ openHabitModule.controller('LoadingController', ['$scope', '$rootScope', '$state
                     var homepage = sitemap_content_result.homepage;
                     var widgetCollection = [];
 
-                    iterateWidgets('app.' + homepage.id, homepage.widget, StateCreator, $state, widgetCollection, true);
+                    iterateWidgets('app.' + homepage.id, homepage.widget, StateCreator, $state, widgetCollection, true, undefined, ModelService);
                     console.log("result received for app " + widgetCollection.length);
 
                     sitemaps_result.sitemap[index].widgetCollection = widgetCollection;
@@ -46,7 +46,7 @@ openHabitModule.controller('LoadingController', ['$scope', '$rootScope', '$state
 
     }]);
 
-function iterateWidgets(stateName, widgets, StateCreator, $state, widgetCollection, createNewState) {
+function iterateWidgets(stateName, widgets, StateCreator, $state, widgetCollection, createNewState, parent, ModelService) {
 
     if (createNewState === true) {
 
@@ -55,14 +55,10 @@ function iterateWidgets(stateName, widgets, StateCreator, $state, widgetCollecti
         else
             widgetCollection[stateName] = widgets;
 
-        var newState = StateCreator.createState(stateName);
+        var newState = StateCreator.createState(stateName, parent ? parent.label : stateName);
 
-        if ($state.get(stateName) == null) {
+        if ($state.get(stateName) == null)
             openHabitModule.stateProvider.state(stateName, newState);
-
-            //console.log("create state " + stateName);
-
-        }
     }
 
     if (angular.isArray(widgets) === false)
@@ -73,13 +69,13 @@ function iterateWidgets(stateName, widgets, StateCreator, $state, widgetCollecti
         //console.log(widget.widgetId);
 
         if (widget.linkedPage) {
-            iterateWidgets(stateName + "." + widget.linkedPage.id, widget.linkedPage.widget, StateCreator, $state, widgetCollection, true);
+            iterateWidgets(stateName + "." + widget.linkedPage.id, widget.linkedPage.widget, StateCreator, $state, widgetCollection, true, widget, ModelService);
         } else if (widget.widget) {
             if (widget.type === "Frame")
             // Frames are flattered, so don't add them to the state collection
-                iterateWidgets(stateName, widget.widget, StateCreator, $state, widgetCollection, false);
+                iterateWidgets(stateName, widget.widget, StateCreator, $state, widgetCollection, false, widget, ModelService);
             else
-                iterateWidgets(stateName + "." + widget.widgetId, widget.widget, StateCreator, $state, widgetCollection, true);
+                iterateWidgets(stateName + "." + widget.widgetId, widget.widget, StateCreator, $state, widgetCollection, true, widget, ModelService);
         }
     });
 }
