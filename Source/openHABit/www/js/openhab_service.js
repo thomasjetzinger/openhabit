@@ -36,9 +36,9 @@ sitemapServices.factory('Page', ['$resource', '$localStorage','ModelService',
 sitemapServices.factory('Item', ['$resource',
     function ($resource) {
         return function (url) {
-            return $resource(url + '/state',{}, {
+            return $resource(url ,{}, {
                     update: {
-                        method: 'PUT', params: {}, isArray: false,
+                        method: 'POST', params: {}, isArray: false,
                         headers: {
                             'Content-Type': 'text/plain; charset=UTF-8',
                             'Access-Control-Allow-Origin': ' *'/*,
