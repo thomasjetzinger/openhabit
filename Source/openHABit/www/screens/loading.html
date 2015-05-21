@@ -1,6 +1,27 @@
 <ion-view view-title="Loading">
     <ion-content>
-        <h1>Loading</h1>
+<div ng-show="isLoading">
+        <md-progress-linear  md-mode="indeterminate"></md-progress-linear>
+
+        <div class ="container_loading md-primary">
+        <h3>Connection to openHAB...</h3>
+        </div>
+</div>
+
+        <div ng-show="isError">
+
+
+            <div class ="container_loading md-warn">
+                <h4>Opps, something went wrong!</h4>
+            </div>
+
+
+            <section layout="row" layout-sm="column" layout-align="center center">
+                <md-button class="md-raised" ng-click="goToSettings()">Change OpenHAB url</md-button>
+                <md-button class="md-raised md-primary" ng-click="retry()">Retry</md-button>
+            </section>
+        </div>
+
     </ion-content>
 </ion-view>
 

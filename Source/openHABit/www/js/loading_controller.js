@@ -2,13 +2,27 @@
  * Created by Thomas Jetzinger on 17/05/2015.
  */
 
-openHabitModule.controller('LoadingController', ['$scope', '$rootScope', '$state', 'Sitemaps', 'Sitemap', 'StateCreator',
-    'ModelService', 'Page', '$ionicHistory',
-    function ($scope, $rootScope, $state, Sitemaps, Sitemap, StateCreator, ModelService, Page, $ionicHistory) {
-        console.log("query sitemaps");
-        var sitemaps = Sitemaps.query();
+openHabitModule.controller('LoadingController',
+    function ($scope, $rootScope, $state, Sitemaps, Sitemap, StateCreator, ModelService, Page, $ionicHistory, $ionicLoading) {
 
-        sitemaps.$promise.then(function (sitemaps_result) {
+        $scope.retry = function () {
+            console.log("LoadingController: query sitemaps");
+            $scope.isLoading = true;
+            $scope.isError = false;
+            Sitemaps.query().$promise.then(requestSuccess, requestError);
+        };
+
+        // load the first time
+        //$scope.retry();
+        $scope.isLoading = false;
+        $scope.goToSettings = function () {
+            $state.go('app.loading.settings');
+        };
+
+
+        function requestSuccess(sitemaps_result) {
+            $scope.isError = false;
+            console.log("LoadingController: request success!");
             var index = 0;
             // create array if sitemap_result has only one sitemap
             if (angular.isArray(sitemaps_result.sitemap) === false)
@@ -21,7 +35,7 @@ openHabitModule.controller('LoadingController', ['$scope', '$rootScope', '$state
                     var homepage = sitemap_content_result.homepage;
                     var widgetCollection = [];
 
-                    iterateWidgets('app.' + homepage.id, homepage.widget, StateCreator, $state, widgetCollection, true, undefined, ModelService);
+                    iterateWidgets('app.' + homepage.id, homepage.widget, $state, widgetCollection, true, undefined);
                     console.log("result received for app " + widgetCollection.length);
 
                     sitemaps_result.sitemap[index].widgetCollection = widgetCollection;
@@ -37,45 +51,58 @@ openHabitModule.controller('LoadingController', ['$scope', '$rootScope', '$state
                             disableAnimate: true,
                             disableBack: true
                         });
+                        $scope.isLoading = false;
                         $state.go('app.' + homepage.id);
                     }
                 });
 
             });
-        });
-
-    }]);
-
-function iterateWidgets(stateName, widgets, StateCreator, $state, widgetCollection, createNewState, parent, ModelService) {
-
-    if (createNewState === true) {
-
-        if (stateName in widgetCollection)
-            widgetCollection[stateName].push(widgets);
-        else
-            widgetCollection[stateName] = widgets;
-
-        var newState = StateCreator.createState(stateName, parent ? parent.label : "Home");
-
-        if ($state.get(stateName) == null)
-            openHabitModule.stateProvider.state(stateName, newState);
-    }
-
-    if (angular.isArray(widgets) === false)
-        widgets = [widgets];
-
-    angular.forEach(widgets, function (widget) {
-
-        //console.log(widget.widgetId);
-
-        if (widget.linkedPage) {
-            iterateWidgets(stateName + "." + widget.linkedPage.id, widget.linkedPage.widget, StateCreator, $state, widgetCollection, true, widget, ModelService);
-        } else if (widget.widget) {
-            if (widget.type === "Frame")
-            // Frames are flattered, so don't add them to the state collection
-                iterateWidgets(stateName, widget.widget, StateCreator, $state, widgetCollection, false, widget, ModelService);
-            else
-                iterateWidgets(stateName + "." + widget.widgetId, widget.widget, StateCreator, $state, widgetCollection, true, widget, ModelService);
         }
+
+        function requestError(error) {
+            $scope.isLoading = false;
+            $scope.isError = true;
+
+            console.log("LoadingController: request error!\n" + error);
+
+        }
+
+
+        function iterateWidgets(stateName, widgets, $state, widgetCollection, createNewState, parent) {
+
+            if (createNewState === true) {
+
+                if (stateName in widgetCollection)
+                    widgetCollection[stateName].push(widgets);
+                else
+                    widgetCollection[stateName] = widgets;
+
+                var newState = StateCreator.createState(stateName, parent ? parent.label : "Home");
+
+                if ($state.get(stateName) == null)
+                    openHabitModule.stateProvider.state(stateName, newState);
+            }
+
+            if (angular.isArray(widgets) === false)
+                widgets = [widgets];
+
+            angular.forEach(widgets, function (widget) {
+
+                //console.log(widget.widgetId);
+
+                if (widget.linkedPage) {
+                    iterateWidgets(stateName + "." + widget.linkedPage.id, widget.linkedPage.widget, $state, widgetCollection, true, widget);
+                } else if (widget.widget) {
+                    if (widget.type === "Frame")
+                    // Frames are flattered, so don't add them to the state collection
+                        iterateWidgets(stateName, widget.widget, $state, widgetCollection, false, widget);
+                    else
+                        iterateWidgets(stateName + "." + widget.widgetId, widget.widget, $state, widgetCollection, true, widget);
+                }
+            });
+        }
+
     });
-}
+
+
+

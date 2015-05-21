@@ -152,3 +152,12 @@ p {
     /*flex-direction: row;*/
     width: 10%;
 }
+
+.container_loading{
+    display: flex;
+    justify-content: center;
+    align-items:  center;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 10%;
+}
