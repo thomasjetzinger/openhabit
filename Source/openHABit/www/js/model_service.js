@@ -70,17 +70,22 @@ openHabitModule.service('ModelService', function () {
         function getFullId(_id) {
             if(_id in currentSitemap.widgetCollection == false) {
 
+                // first try to find _id in the states
                 for(var stateName in currentSitemap.widgetCollection) {
 
                     if (stateName.indexOf(_id) >= 0) {
                         return stateName;
                     }
+                }
 
+                // second check if the given _id is part of a group name
+                // e.g. 0000_1 belongs to 0000
+                for(var stateName in currentSitemap.widgetCollection) {
                     // iterate through widgets
                     var groupName = stateName.substr(stateName.lastIndexOf(".") + 1);
 
                     if(_id.indexOf(groupName) == 0) {
-                       return [stateName, _id];
+                        return [stateName, _id];
                     }
                 }
             }
